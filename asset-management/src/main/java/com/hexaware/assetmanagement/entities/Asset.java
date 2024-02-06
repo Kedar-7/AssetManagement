@@ -25,8 +25,6 @@ public class Asset {
 
     private String assetName;
 	
-	
-
     private String assetCategory;
 
     private String assetModel;
@@ -70,6 +68,7 @@ public class Asset {
 		this.assetServiceRequests = assetServiceRequests;
 		this.assetAudits = assetAudits;
 	}
+	
 
 	public int getAssetId() {
 		return assetId;
@@ -167,11 +166,6 @@ public class Asset {
 		this.assetAudits = assetAudits;
 	}
 
-	@Override
-	public String toString() {
-		return "Asset [assetId=" + assetId + ", assetNo=" + assetNo + ", assetName=" + assetName + ", assetCategory="
-				+ assetCategory + ", assetModel=" + assetModel + ", manufacturingDate=" + manufacturingDate
-				+ ", expiryDate=" + expiryDate + ", assetValue=" + assetValue + ", status=" + status + "]";
-	}
+
 
 }

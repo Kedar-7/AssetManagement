@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hexaware.assetmanagement.dto.UserDTO;
+import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.entities.User;
 
 @SpringBootTest
@@ -25,25 +26,25 @@ class UserServiceImpTest {
 
 	@Test
 	void testGetAllUsers() {
-		List list = service.getAllUsers();
-		boolean flag = list.isEmpty();
-		assertFalse(flag);
+
+		List<User> userList = service.getAllUsers();
+        assertFalse(userList.isEmpty());
 		
 	}
 
 	@Test
 	void testGetUserById() {
 		UserDTO users = service.getUserById(2);
-		assertEquals("Aman", users.getUsername());
+		assertEquals("priya_sharma", users.getUsername());
 
 	}
 
 	@Test
 	void testDeleteUserById() {
-		User user = new User();
-		int id = 5;
-		String count = service.deleteUserById(id);
-		assertEquals(id, user.getUserId());
+		int userId = 3;
+        String result = service.deleteUserById(userId);
+        assertNotNull(result);
+        assertEquals("Record Deleted", result);
 		
 	}
 

@@ -27,38 +27,31 @@ class AssetsServiceImpTest {
 
 	@Test
 	void testGetAllAssets() {
-		List list = service.getAllAssets();
-		boolean flag = list.isEmpty();
-		assertFalse(flag);
-	}
-
-	@Test
-	void testAddAssets() {
-		/*
-		Asset asset = new Asset(11, "IN223345", "Gaming Chair", "Furniture", "Model G",
-                Date.valueOf("2022-12-22"), Date.valueOf("2022-12-24"),
-                new BigDecimal("5000"), "In Use");
-        */        
-         
-		/*
-		Asset a1 = service.addAssets(asset);
-		assertEquals(11, a1.getAssetId());
-		*/
+//		List list = service.getAllAssets();
+//		boolean flag = list.isEmpty();
+//		assertFalse(flag);
+		
+		List<Asset> assetDTOList = service.getAllAssets();
+        assertFalse(assetDTOList.isEmpty());
 	}
 
 	@Test
 	void testGetAssetById() {
-		AssetDTO assets = service.getAssetById(4);
-		assertEquals("Sofa", assets.getAssetName());
+		
+//		AssetDTO assets = service.getAssetById(4);
+//		assertEquals("Sofa", assets.getAssetName());
+		
+        AssetDTO assetDTO = service.getAssetById(1);
+        assertNotNull(assetDTO);
+        assertEquals("Laptop", assetDTO.getAssetName());
 	}
 
 	@Test
 	void testDeleteAssetById() {
-		Asset a1 = new Asset();
-		int assetId = 11;
-		String count = service.deleteAssetById(assetId);
-		
-		assertEquals(11, a1.getAssetId());
+		int assetId = 3;
+        String result = service.deleteAssetById(assetId);
+        assertNotNull(result);
+        assertEquals("Record Deleted", result);
 		
 		
 	}

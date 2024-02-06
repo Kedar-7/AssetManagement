@@ -17,16 +17,19 @@ public class AssetRequest {
 	@Id
 	@Column(name = "RequestId")
 	private int requestId;
-	/*
-	@Column(name = "EmployeeId")
-    private int employeeId;
+	
 	@Column(name = "AssetId")
     private int assetId;
-    */
+	
+	@Column(name = "UserId")
+	private int userId;
+
 	@Column(name = "RequestType")
     private String requestType;
+	
 	@Column(name = "DateRequested")
     private Date dateRequested;
+	
 	@Column(name = "Status")
     private String status;
 	
@@ -38,37 +41,12 @@ public class AssetRequest {
     @JoinColumn(name = "AssetID")
     private Asset asset;
 
-	public AssetRequest() {
-		super();
-	}
-
-	public AssetRequest(int requestId, String requestType, Date dateRequested,
-			String status, User users, Asset asset) {
-		super();
-		this.requestId = requestId;
-//		this.employeeId = employeeId;
-//		this.assetId = assetId;
-		this.requestType = requestType;
-		this.dateRequested = dateRequested;
-		this.status = status;
-		this.users = users;
-		this.asset = asset;
-	}
-
 	public int getRequestId() {
 		return requestId;
 	}
 
 	public void setRequestId(int requestId) {
 		this.requestId = requestId;
-	}
-/*
-	public int getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
 	}
 
 	public int getAssetId() {
@@ -78,7 +56,14 @@ public class AssetRequest {
 	public void setAssetId(int assetId) {
 		this.assetId = assetId;
 	}
-	*/
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getRequestType() {
 		return requestType;
@@ -120,12 +105,26 @@ public class AssetRequest {
 		this.asset = asset;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "AssetRequest [requestId=" + requestId + ", employeeId=" + employeeId + ", assetId=" + assetId
-//				+ ", requestType=" + requestType + ", dateRequested=" + dateRequested + ", status=" + status
-//				+ ", employee=" + employee + ", asset=" + asset + "]";
-//	}
+	public AssetRequest(int requestId, int assetId, int userId, String requestType, Date dateRequested, String status,
+			User users, Asset asset) {
+		super();
+		this.requestId = requestId;
+		this.assetId = assetId;
+		this.userId = userId;
+		this.requestType = requestType;
+		this.dateRequested = dateRequested;
+		this.status = status;
+		this.users = users;
+		this.asset = asset;
+	}
+
+	public AssetRequest() {
+		super();
+	}
     
+    
+
+
+
     
 }

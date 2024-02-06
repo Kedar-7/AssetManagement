@@ -45,7 +45,6 @@ public class UserServiceImp implements IUserService{
 	@Override
 	public User addUser(UserDTO userDTO) {
 		User user= new User(); 
-
 		
 		user.setAddress(userDTO.getAddress());
 		user.setContactNumber(userDTO.getContactnumber());
