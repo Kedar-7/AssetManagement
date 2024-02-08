@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class AssetRequestDTO {
 	private int requestId;
-    private int employeeId;
+    private int userId;
     private int assetId;
     private String requestType;
     private Date dateRequested;
@@ -14,11 +14,11 @@ public class AssetRequestDTO {
         // Default constructor
     }
 
-	public AssetRequestDTO(int requestId, int employeeId, int assetId, String requestType, Date dateRequested,
+	public AssetRequestDTO(int requestId, int userId, int assetId, String requestType, Date dateRequested,
 			String status) {
 		super();
 		this.requestId = requestId;
-		this.employeeId = employeeId;
+		this.userId = userId;
 		this.assetId = assetId;
 		this.requestType = requestType;
 		this.dateRequested = dateRequested;
@@ -33,20 +33,20 @@ public class AssetRequestDTO {
 		this.requestId = requestId;
 	}
 
-	public int getEmployeeId() {
-		return employeeId;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setUserId(int employeeId) {
+		this.userId = employeeId;
 	}
 
 	public int getAssetId() {
 		return assetId;
 	}
 
-	public void setAssetId(int assetId) {
-		this.assetId = assetId;
+	public void setAssetId(int userId) {
+		this.assetId = userId;
 	}
 
 	public String getRequestType() {
@@ -75,7 +75,7 @@ public class AssetRequestDTO {
 
 	@Override
 	public String toString() {
-		return "AssetRequest [requestId=" + requestId + ", employeeId=" + employeeId + ", assetId=" + assetId
+		return "AssetRequest [requestId=" + requestId + ", employeeId=" + userId + ", assetId=" + assetId
 				+ ", requestType=" + requestType + ", dateRequested=" + dateRequested + ", status=" + status + "]";
 	}
 }

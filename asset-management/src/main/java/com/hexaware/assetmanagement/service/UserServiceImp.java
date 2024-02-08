@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hexaware.assetmanagement.dto.UserDTO;
 import com.hexaware.assetmanagement.entities.User;
 import com.hexaware.assetmanagement.repository.UserRepository;
 
@@ -21,8 +22,18 @@ public class UserServiceImp implements IUserService {
 	}
 
 	@Override
-	public User addUsers(User users) {
-		return repo.save(users);
+	public User addUsers(UserDTO userDTO) {
+		User user= new User(); 
+		
+		user.setAddress(userDTO.getAddress());
+		user.setContactNumber(userDTO.getContactNumber());
+		user.setGender(userDTO.getGender());
+		user.setName(userDTO.getName());
+		user.setPassword(userDTO.getPassword());
+		user.setUserId(userDTO.getUserId());
+		user.setUsername(userDTO.getUsername());
+
+		return repo.save(user);
 	}
 
 	@Override

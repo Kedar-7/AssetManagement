@@ -49,6 +49,20 @@ public class AssetAudit {
 		this.asset = asset;
 	}
 
+/*
+	public AssetAudit(int auditId, Date dateAudited, String status,
+			Asset asset) {
+		super();
+		this.auditId = auditId;
+//		this.employeeId = employeeId;
+//		this.assetId = assetId;
+		this.dateAudited = dateAudited;
+		this.status = status;
+		//this.users = users;
+		this.asset = asset;
+	}
+	
+*/
 	public int getAuditId() {
 		return auditId;
 	}
@@ -88,7 +102,7 @@ public class AssetAudit {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+/*
 	public User getUsers() {
 		return users;
 	}
@@ -96,7 +110,7 @@ public class AssetAudit {
 	public void setUsers(User users) {
 		this.users = users;
 	}
-
+*/
 	public Asset getAsset() {
 		return asset;
 	}

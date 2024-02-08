@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.hexaware.assetmanagement.dto.AssetDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 
 
@@ -47,17 +48,26 @@ class AssetsServiceImpTest {
 
 	@Test
 	void testGetAssetById() {
-		Asset assets = service.getAssetById(4);
-		assertEquals("Sofa", assets.getAssetName());
+//		AssetDTO assets = service.getAssetById(4);
+//		assertEquals("Sofa", assets.getAssetName());
+		
+        AssetDTO assetDTO = service.getAssetById(1);
+        assertNotNull(assetDTO);
+        assertEquals("Laptop", assetDTO.getAssetName());
 	}
 
 	@Test
 	void testDeleteAssetById() {
-		Asset a1 = new Asset();
-		int assetId = 11;
-		String count = service.deleteAssetById(assetId);
+//		Asset a1 = new Asset();
+//		int assetId = 11;
+//		String count = service.deleteAssetById(assetId);
+//		
+//		assertEquals(11, a1.getAssetId());
 		
-		assertEquals(11, a1.getAssetId());
+		int assetId = 3;
+        String result = service.deleteAssetById(assetId);
+        assertNotNull(result);
+        assertEquals("Record Deleted", result);
 		
 		
 	}

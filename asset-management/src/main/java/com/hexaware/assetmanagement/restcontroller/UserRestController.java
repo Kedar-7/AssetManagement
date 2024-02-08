@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.assetmanagement.dto.UserDTO;
 import com.hexaware.assetmanagement.entities.User;
 import com.hexaware.assetmanagement.service.IUserService;
 
@@ -23,7 +24,7 @@ public class UserRestController {
 	IUserService service;
 	
 	@PostMapping("/add")
-	public User addUsers(@RequestBody User users) {
+	public User addUsers(@RequestBody UserDTO users) {
 		return service.addUsers(users);
 	}
 	
@@ -44,7 +45,7 @@ public class UserRestController {
 	}
 	
 	@GetMapping("/getbyid/{userId}")
-	public User getUserById(int userId) {
+	public User getUserById(@PathVariable int userId) {
 		return service.getUserById(userId);
 	}
 }

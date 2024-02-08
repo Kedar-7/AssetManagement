@@ -1,7 +1,11 @@
 package com.hexaware.assetmanagement.service;
 
+import java.util.List;
+
+import com.hexaware.assetmanagement.entities.AssetServiceRequest;
+
 public interface IServiceRequest {
-	void createServiceRequest(int userId, String description);
-    void updateServiceRequestStatus(int serviceRequestId, String status);
+	public List<AssetServiceRequest> getAllServiceRequests();
+    public String deleteServiceRequests(int serviceRequestId);
 
 }

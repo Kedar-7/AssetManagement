@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "AssetServiceRequests")
@@ -25,6 +26,7 @@ public class AssetServiceRequest {
     private String issueType;
 	@Column(name = "DateRequested")
     private Date dateRequested;
+	@Pattern(regexp = "^[A-Z][a-zA-Z]*$", message = "Name must contain only alphabetic characters")
 	@Column(name = "Status")
     private String status;
 	
@@ -52,7 +54,22 @@ public class AssetServiceRequest {
 		this.users = users;
 		this.asset = asset;
 	}
-
+	
+	
+/*
+	public AssetServiceRequest(int serviceRequestId, String issueType, Date dateRequested,
+			String status, Asset asset) {
+		super();
+		this.serviceRequestId = serviceRequestId;
+//		this.employeeId = employeeId;
+//		this.assetId = assetId;
+		this.issueType = issueType;
+		this.dateRequested = dateRequested;
+		this.status = status;
+		//this.users = users;
+		this.asset = asset;
+	}
+*/
 	public int getServiceRequestId() {
 		return serviceRequestId;
 	}

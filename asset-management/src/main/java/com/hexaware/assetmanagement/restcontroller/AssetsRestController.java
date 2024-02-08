@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hexaware.assetmanagement.dto.AssetDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.service.IAssetsService;
 
@@ -27,8 +28,8 @@ public class AssetsRestController {
 	}
 	
 	@PostMapping("/add")
-	public Asset insertAssets(@RequestBody Asset asset) {
-		return service.addAssets(asset);
+	public Asset insertAssets(@RequestBody AssetDTO assetDTO) {
+		return service.addAssets(assetDTO);
 	}
 	@PutMapping("/update")
 	public Asset updateAssets(@RequestBody  Asset asset) {
@@ -36,7 +37,7 @@ public class AssetsRestController {
 	}
 	
 	@GetMapping("/getbyid/{assetId}")
-	public Asset getAssetById(@PathVariable int assetId) {
+	public AssetDTO getAssetById(@PathVariable int assetId) {
 		return service.getAssetById(assetId);
 	}
 	

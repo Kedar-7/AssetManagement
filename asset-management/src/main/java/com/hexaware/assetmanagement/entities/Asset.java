@@ -7,6 +7,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -40,13 +41,13 @@ public class Asset {
 	@Column(name= "Status")
     private String status;
 	
-	@OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "asset", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AssetRequest> assetRequests;
 
-    @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AssetServiceRequest> assetServiceRequests;
 
-    @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "asset", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<AssetAudit> assetAudits;
 
 	public Asset() {

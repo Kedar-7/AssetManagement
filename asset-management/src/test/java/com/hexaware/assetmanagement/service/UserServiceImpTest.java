@@ -32,17 +32,24 @@ class UserServiceImpTest {
 
 	@Test
 	void testGetUserById() {
+//		User users = service.getUserById(2);
+//		assertEquals("Aman", users.getUsername());
+		
 		User users = service.getUserById(2);
-		assertEquals("Aman", users.getUsername());
+		assertEquals("priya_sharma", users.getUsername());
 
 	}
 
 	@Test
 	void testDeleteUserById() {
-		User user = new User();
-		int id = 5;
-		String count = service.deleteUserById(id);
-		assertEquals(id, user.getUserId());
+//		User user = new User();
+//		int id = 5;
+//		String count = service.deleteUserById(id);
+//		assertEquals(id, user.getUserId());
+		int userId = 3;
+        String result = service.deleteUserById(userId);
+        assertNotNull(result);
+        assertEquals("Record Deleted", result);
 		
 	}
 

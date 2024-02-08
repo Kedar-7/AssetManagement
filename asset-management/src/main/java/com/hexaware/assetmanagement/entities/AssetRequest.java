@@ -54,7 +54,21 @@ public class AssetRequest {
 		this.users = users;
 		this.asset = asset;
 	}
-
+	
+/*
+	public AssetRequest(int requestId, String requestType, Date dateRequested,
+			String status, Asset asset) {
+		super();
+		this.requestId = requestId;
+//		this.employeeId = employeeId;
+//		this.assetId = assetId;
+		this.requestType = requestType;
+		this.dateRequested = dateRequested;
+		this.status = status;
+		//this.users = users;
+		this.asset = asset;
+	}
+*/
 	public int getRequestId() {
 		return requestId;
 	}
