@@ -2,44 +2,33 @@ package com.hexaware.assetmanagement.entities;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "AssetRequests")
 public class AssetRequest {
 	
 	@Id
-	@Column(name = "RequestId")
 	private int requestId;
 	
-	@Column(name = "AssetId")
-    private int assetId;
-	
-	@Column(name = "UserId")
-	private int userId;
 
-	@Column(name = "RequestType")
     private String requestType;
-	
-	@Column(name = "DateRequested")
     private Date dateRequested;
-	
-	@Column(name = "Status")
     private String status;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "UserID")
-    private User users;
+    @JoinColumn(name = "EmployeeID")
+	@JsonBackReference
+    private Employee employee;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "AssetID")
-    private Asset asset;
+	public AssetRequest() {
+		super();
+	}
 
 	public int getRequestId() {
 		return requestId;
@@ -47,22 +36,6 @@ public class AssetRequest {
 
 	public void setRequestId(int requestId) {
 		this.requestId = requestId;
-	}
-
-	public int getAssetId() {
-		return assetId;
-	}
-
-	public void setAssetId(int assetId) {
-		this.assetId = assetId;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	public String getRequestType() {
@@ -89,42 +62,14 @@ public class AssetRequest {
 		this.status = status;
 	}
 
-	public User getUsers() {
-		return users;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setUsers(User users) {
-		this.users = users;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
+	
+	
 
-	public Asset getAsset() {
-		return asset;
-	}
-
-	public void setAsset(Asset asset) {
-		this.asset = asset;
-	}
-
-	public AssetRequest(int requestId, int assetId, int userId, String requestType, Date dateRequested, String status,
-			User users, Asset asset) {
-		super();
-		this.requestId = requestId;
-		this.assetId = assetId;
-		this.userId = userId;
-		this.requestType = requestType;
-		this.dateRequested = dateRequested;
-		this.status = status;
-		this.users = users;
-		this.asset = asset;
-	}
-
-	public AssetRequest() {
-		super();
-	}
-    
-    
-
-
-
-    
 }

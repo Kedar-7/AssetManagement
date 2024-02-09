@@ -1,32 +1,48 @@
 package com.hexaware.assetmanagement.dto;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
-import jakarta.persistence.Id;
+import com.hexaware.assetmanagement.entities.Asset;
+
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Pattern;
 
 public class AssetDTO {
 
 	private int assetId;
-    private String assetNo;
-    private String assetName;
-    private String assetCategory;
-    private String assetModel;
-    private Date manufacturingDate;
-    private Date expiryDate;
-    private BigDecimal assetValue;
-    private String status;
+
+	private String assetName;
+	private String assetCategory;
+	private String assetModel;
+	private LocalDate manufacturingDate;
+	private LocalDate expiryDate;
+	private double assetValue;
+	private String status;
+    private Asset asset;
+	public AssetDTO(int assetId, String assetName, String assetCategory, String assetModel, LocalDate manufacturingDate,
+			LocalDate expiryDate, double assetValue, String status, Asset asset) {
+		super();
+		this.assetId = assetId;
+		this.assetName = assetName;
+		this.assetCategory = assetCategory;
+		this.assetModel = assetModel;
+		this.manufacturingDate = manufacturingDate;
+		this.expiryDate = expiryDate;
+		this.assetValue = assetValue;
+		this.status = status;
+		this.asset = asset;
+	}
+	public Asset getAsset() {
+		return asset;
+	}
+	public void setAsset(Asset asset) {
+		this.asset = asset;
+	}
 	public int getAssetId() {
 		return assetId;
 	}
 	public void setAssetId(int assetId) {
 		this.assetId = assetId;
-	}
-	public String getAssetNo() {
-		return assetNo;
-	}
-	public void setAssetNo(String assetNo) {
-		this.assetNo = assetNo;
 	}
 	public String getAssetName() {
 		return assetName;
@@ -46,22 +62,22 @@ public class AssetDTO {
 	public void setAssetModel(String assetModel) {
 		this.assetModel = assetModel;
 	}
-	public Date getManufacturingDate() {
+	public LocalDate getManufacturingDate() {
 		return manufacturingDate;
 	}
-	public void setManufacturingDate(Date manufacturingDate) {
+	public void setManufacturingDate(LocalDate manufacturingDate) {
 		this.manufacturingDate = manufacturingDate;
 	}
-	public Date getExpiryDate() {
+	public LocalDate getExpiryDate() {
 		return expiryDate;
 	}
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(LocalDate expiryDate) {
 		this.expiryDate = expiryDate;
 	}
-	public BigDecimal getAssetValue() {
+	public double getAssetValue() {
 		return assetValue;
 	}
-	public void setAssetValue(BigDecimal assetValue) {
+	public void setAssetValue(double assetValue) {
 		this.assetValue = assetValue;
 	}
 	public String getStatus() {
@@ -70,23 +86,10 @@ public class AssetDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public AssetDTO(int assetId, String assetNo, String assetName, String assetCategory, String assetModel,
-			Date manufacturingDate, Date expiryDate, BigDecimal assetValue, String status) {
-		super();
-		this.assetId = assetId;
-		this.assetNo = assetNo;
-		this.assetName = assetName;
-		this.assetCategory = assetCategory;
-		this.assetModel = assetModel;
-		this.manufacturingDate = manufacturingDate;
-		this.expiryDate = expiryDate;
-		this.assetValue = assetValue;
-		this.status = status;
-	}
+
 	public AssetDTO() {
 		super();
 	}
-	
 	
 	
 }
