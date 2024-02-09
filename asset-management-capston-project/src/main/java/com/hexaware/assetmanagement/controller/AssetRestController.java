@@ -16,6 +16,7 @@ import org.springframework.web.service.annotation.DeleteExchange;
 
 import com.hexaware.assetmanagement.dto.AssetDTO;
 import com.hexaware.assetmanagement.entities.Asset;
+import com.hexaware.assetmanagement.exception.AssetNotFoundException;
 import com.hexaware.assetmanagement.service.IAssetService;
 
 
@@ -42,7 +43,7 @@ public class AssetRestController {
 	}
 	
 	@PutMapping("/updateAsset")
-	public Asset updateAsset(@RequestBody AssetDTO assetDTO) {
+	public Asset updateAsset(@RequestBody AssetDTO assetDTO) throws AssetNotFoundException    {
 		return service.updateAsset(assetDTO);
 	}
 	
@@ -69,5 +70,7 @@ public class AssetRestController {
 		return service.displayAssetByName(name);
 		
 	}
+	
+
 
 }

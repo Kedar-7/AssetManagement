@@ -16,6 +16,19 @@ public class GlobalExceptionHandler {
 	}
 	
 	
+	@ExceptionHandler({AssetServiceRequestNotFoundException.class})
+	public ResponseEntity<String> handleExp1(AssetServiceRequestNotFoundException e2) {
+		
+		return new ResponseEntity<String>(e2.toString(),HttpStatus.NOT_ACCEPTABLE);
+	}
+	
+	@ExceptionHandler({EmployeeNotFoundException.class})
+	public ResponseEntity<String> handleExp1(EmployeeNotFoundException e3) {
+		
+		return new ResponseEntity<String>(e3.toString(),HttpStatus.NOT_ACCEPTABLE);
+	}
+	
+	
 	
 	
 }

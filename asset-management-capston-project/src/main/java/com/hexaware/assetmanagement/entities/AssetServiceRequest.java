@@ -36,6 +36,10 @@ public class AssetServiceRequest {
     
     @JoinColumn(name = "AssetID")
     private Asset asset;
+    
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "EmployeeId")
+    private Employee employee;
 
 	public int getServiceRequestId() {
 		return serviceRequestId;
@@ -77,21 +81,31 @@ public class AssetServiceRequest {
 		this.asset = asset;
 	}
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	public AssetServiceRequest(int serviceRequestId, String issueType, LocalDate dateRequested,
 			@Pattern(regexp = "^[A-Z][a-zA-Z]*$", message = "Name must contain only alphabetic characters") String status,
-			Asset asset) {
+			Asset asset, Employee employee) {
 		super();
 		this.serviceRequestId = serviceRequestId;
 		this.issueType = issueType;
 		this.dateRequested = dateRequested;
 		this.status = status;
 		this.asset = asset;
+		this.employee = employee;
 	}
 
 	public AssetServiceRequest() {
 		super();
 	}
-    
+ 
+	
 
 	
 }

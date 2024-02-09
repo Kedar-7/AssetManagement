@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hexaware.assetmanagement.dto.AssetServiceRequestDTO;
 import com.hexaware.assetmanagement.entities.AssetServiceRequest;
 import com.hexaware.assetmanagement.exception.AssetNotFoundException;
+import com.hexaware.assetmanagement.exception.AssetServiceRequestNotFoundException;
+import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
 import com.hexaware.assetmanagement.service.IAssetServiceRequestService;
 
 @RestController
@@ -25,10 +27,10 @@ public class AssetServiceRequestRestController {
 	IAssetServiceRequestService service;
 
 
-	@PostMapping("/addNewRequest/{assetId}")
-	public AssetServiceRequest addServiceRequest(@RequestBody AssetServiceRequestDTO assetserviceDTO,@PathVariable int assetId) throws AssetNotFoundException{
+	@PostMapping("/addNewRequest/{assetId}/{employeeId}")
+	public AssetServiceRequest addServiceRequest(@RequestBody AssetServiceRequestDTO assetserviceDTO,@PathVariable int assetId , @PathVariable int employeeId) throws AssetNotFoundException, EmployeeNotFoundException{
 		
-		return service.addServiceRequest(assetserviceDTO, assetId);
+		return service.addServiceRequest(assetserviceDTO, assetId,employeeId);
 	}
 
 	@DeleteMapping("deleteById/{requestId}")
@@ -42,6 +44,11 @@ public class AssetServiceRequestRestController {
 	public List<AssetServiceRequest> displayAllServiceRequest(){
 		
 		return service.displayAllServiceRequest();
+	}
+	
+	@GetMapping("/displayById/{requestId}")
+	public AssetServiceRequest displayServiceRequestById(@PathVariable int requestId) throws AssetServiceRequestNotFoundException {
+		return service.displayRequestById(requestId);
 	}
 
 }

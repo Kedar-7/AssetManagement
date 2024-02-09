@@ -7,6 +7,8 @@ import com.hexaware.assetmanagement.dto.AssetServiceRequestDTO;
 
 import com.hexaware.assetmanagement.entities.AssetServiceRequest;
 import com.hexaware.assetmanagement.exception.AssetNotFoundException;
+import com.hexaware.assetmanagement.exception.AssetServiceRequestNotFoundException;
+import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
 
 public interface IAssetServiceRequestService {
 	
@@ -16,7 +18,12 @@ public interface IAssetServiceRequestService {
 
 	public List<AssetServiceRequest> displayAllServiceRequest();
 
-	AssetServiceRequest addServiceRequest(AssetServiceRequestDTO assetserviceDTO, int assetId) throws AssetNotFoundException;
+
 	
+	public AssetServiceRequest displayRequestById(int requestId) throws AssetServiceRequestNotFoundException;
+
+
+	AssetServiceRequest addServiceRequest(AssetServiceRequestDTO assetserviceDTO, int assetId, int employeeId)
+			throws AssetNotFoundException, EmployeeNotFoundException;
 	
 }

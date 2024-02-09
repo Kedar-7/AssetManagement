@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hexaware.assetmanagement.dto.AssetDTO;
 import com.hexaware.assetmanagement.entities.Asset;
+import com.hexaware.assetmanagement.exception.AssetNotFoundException;
 import com.hexaware.assetmanagement.repository.AssetRepository;
 
 @Service
@@ -41,8 +42,14 @@ public class AssetServiceImpl implements IAssetService {
 	}
 
 	@Override
-	public Asset updateAsset(AssetDTO assetDTO) {
+	public Asset updateAsset(AssetDTO assetDTO) throws AssetNotFoundException{
+		
+		Asset asset = repo.findById(assetDTO.getAssetId()).orElse(null);
+		
+		if(asset!= null) {
+				
 		Asset updateAsset = new Asset();
+		
 		updateAsset.setAssetCategory(assetDTO.getAssetCategory());
 		updateAsset.setAssetId(assetDTO.getAssetId());
 		updateAsset.setAssetModel(assetDTO.getAssetModel());
@@ -52,7 +59,11 @@ public class AssetServiceImpl implements IAssetService {
 		updateAsset.setManufacturingDate(assetDTO.getManufacturingDate());
 		updateAsset.setStatus(assetDTO.getStatus());
 
-		return repo.save(updateAsset);
+		return repo.save(updateAsset);}
+		
+		else throw new AssetNotFoundException("Invalid data to update");
+		
+		
 	}
 
 	@Override
