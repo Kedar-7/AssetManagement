@@ -54,8 +54,20 @@ public class EmployeeServiceImp implements IEmployeeService {
 	}
 
 	@Override
-	public Employee updateEmployeeInfo(Employee employee) {
-		return repo.save(employee);
+	public Employee updateEmployeeInfo(EmployeeDTO employee) {
+
+	        logger.info("Updating employee information: {}", employee);
+	        Employee updatedEmployee = new Employee();
+	        updatedEmployee.setEmployeeId(employee.getEmployeeId());
+	        updatedEmployee.setEmployeeName(employee.getEmployeeName());
+	        updatedEmployee.setEmail(employee.getEmail());
+	        updatedEmployee.setPassword(employee.getPassword());
+	        updatedEmployee.setGender(employee.getGender());
+	        updatedEmployee.setContact(employee.getContact());
+	        updatedEmployee.setAddress(employee.getAddress());
+	        updatedEmployee.setRole(employee.getRole());
+	        return repo.save(updatedEmployee);
+	
 	}
 
 	@Override

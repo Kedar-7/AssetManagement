@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -16,7 +18,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
-
+@JsonIgnoreProperties
 public class Asset {
 
 	 @Id
@@ -54,12 +56,18 @@ public class Asset {
 	    private String status;
 	    
 	    @OneToMany(mappedBy = "asset" ,cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-	    @JsonBackReference
+//	    @JsonBackReference
+	    @JsonIgnore
 	    private List<AssetServiceRequest> assetServiceRequest;
 	    
+	    @JsonIgnore
 		@OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
-	    @JsonBackReference
+//	    @JsonBackReference
 	    private List<AssetRequest> assetRequests;
+	    @JsonIgnore
+		@OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
+//	    @JsonBackReference
+		private List<AssetAudit> assetAudit;
 	
 	
 	public Asset(int assetId, @NotNull @Pattern(regexp = "^[A-Z][a-zA-Z]*$") String assetName,

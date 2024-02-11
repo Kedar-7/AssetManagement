@@ -67,6 +67,8 @@ public class AssetRequestController {
     	logger.info("List of user that posses assets");
     	return service.ViewAssetEmployeeInfo();
     }
+    
+
     	
     	
 }

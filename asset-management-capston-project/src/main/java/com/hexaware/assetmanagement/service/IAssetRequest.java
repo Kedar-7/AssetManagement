@@ -15,7 +15,7 @@ public interface IAssetRequest {
 	public AssetRequest findRequest(int requestId);
     public List<AssetRequest> searchAllRequests();
     public AssetRequest updateRequestStatus(String status, int requestId) throws AssetRequestNotFoundException;
-
     public List<AssetRequest> ViewAssetEmployeeInfo();
+
     
 }

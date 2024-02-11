@@ -30,6 +30,35 @@ public class Employee {
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL )
 	@JsonBackReference
 	private List<AssetServiceRequest> assetServiceRequests;
+	
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonBackReference
+	private List<AssetAudit> assetAudit;
+
+	public Employee(int employeeId, String employeeName, String email, String password, String gender, String contact,
+			String address, String role, List<AssetRequest> assetRequests,
+			List<AssetServiceRequest> assetServiceRequests, List<AssetAudit> assetAudit) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeName = employeeName;
+		this.email = email;
+		this.password = password;
+		this.gender = gender;
+		this.contact = contact;
+		this.address = address;
+		this.role = role;
+		this.assetRequests = assetRequests;
+		this.assetServiceRequests = assetServiceRequests;
+		this.assetAudit = assetAudit;
+	}
+
+	public List<AssetAudit> getAssetAudit() {
+		return assetAudit;
+	}
+
+	public void setAssetAudit(List<AssetAudit> assetAudit) {
+		this.assetAudit = assetAudit;
+	}
 
 	public int getEmployeeId() {
 		return employeeId;
@@ -111,25 +140,12 @@ public class Employee {
 		this.assetServiceRequests = assetServiceRequests;
 	}
 
-	public Employee(int employeeId, String employeeName, String email, String password, String gender, String contact,
-			String address, String role, List<AssetRequest> assetRequests,
-			List<AssetServiceRequest> assetServiceRequests) {
-		super();
-		this.employeeId = employeeId;
-		this.employeeName = employeeName;
-		this.email = email;
-		this.password = password;
-		this.gender = gender;
-		this.contact = contact;
-		this.address = address;
-		this.role = role;
-		this.assetRequests = assetRequests;
-		this.assetServiceRequests = assetServiceRequests;
-	}
+
 
 	public Employee() {
 		super();
 	}
+	
 	
 	
 	

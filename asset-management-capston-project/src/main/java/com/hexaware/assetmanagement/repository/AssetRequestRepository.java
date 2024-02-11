@@ -19,4 +19,5 @@ public interface AssetRequestRepository extends JpaRepository<AssetRequest, Inte
 	@Query("select ar from AssetRequest ar where ar.status = 'Approved' ")
 	public List<AssetRequest> ViewAssetEmployeeInfo();
 
+
 }

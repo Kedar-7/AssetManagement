@@ -33,6 +33,11 @@ public class GlobalExceptionHandler {
 		
 		return new ResponseEntity<String>(e4.toString(),HttpStatus.NOT_ACCEPTABLE);
 	}
+	@ExceptionHandler({InvalidEntryException.class})
+	public ResponseEntity<String> handleExp1(InvalidEntryException e5) {
+		
+		return new ResponseEntity<String>(e5.toString(),HttpStatus.NOT_ACCEPTABLE);
+	}
 	
 	
 	

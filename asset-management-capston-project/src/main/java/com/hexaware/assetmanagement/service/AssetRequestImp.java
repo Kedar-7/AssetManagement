@@ -98,6 +98,7 @@ public class AssetRequestImp implements IAssetRequest {
 		return repo.ViewAssetEmployeeInfo();
 	}
 
+
 	
 
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class AssetRequest {
@@ -26,10 +27,12 @@ public class AssetRequest {
 	
     @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinColumn(name = "AssetID")
+    @NotNull
     private Asset asset;
     
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "EmployeeID")
+	@NotNull
     private Employee employee;
 
 	public int getRequestId() {
