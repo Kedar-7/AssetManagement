@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
 import com.hexaware.assetmanagement.service.IAssetServiceRequestService;
 
 @RestController
-@RequestMapping("/asseetServiceRequest")
+@RequestMapping("/assetServiceRequest")
 public class AssetServiceRequestRestController {
 
 	@Autowired
@@ -28,12 +29,14 @@ public class AssetServiceRequestRestController {
 
 
 	@PostMapping("/addNewRequest/{assetId}/{employeeId}")
+	@PreAuthorize("hasAnyAuthority('Admin','User')")
 	public AssetServiceRequest addServiceRequest(@RequestBody AssetServiceRequestDTO assetserviceDTO,@PathVariable int assetId , @PathVariable int employeeId) throws AssetNotFoundException, EmployeeNotFoundException{
 		
 		return service.addServiceRequest(assetserviceDTO, assetId,employeeId);
 	}
 
 	@DeleteMapping("deleteById/{requestId}")
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	public String deleteServiceRequestById(@PathVariable int requestId) {
 		
 		return service.deleteServiceRequestById(requestId);
@@ -41,12 +44,14 @@ public class AssetServiceRequestRestController {
 	
 	
 	@GetMapping("/displayAllRequests")
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	public List<AssetServiceRequest> displayAllServiceRequest(){
 		
 		return service.displayAllServiceRequest();
 	}
 	
 	@GetMapping("/displayById/{requestId}")
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	public AssetServiceRequest displayServiceRequestById(@PathVariable int requestId) throws AssetServiceRequestNotFoundException {
 		return service.displayRequestById(requestId);
 	}

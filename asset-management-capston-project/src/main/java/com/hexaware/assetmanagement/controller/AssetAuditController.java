@@ -3,6 +3,7 @@ package com.hexaware.assetmanagement.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,11 +26,13 @@ public class AssetAuditController {
 	IAssetAuditService service;
 	
 	@PostMapping("/addNewAssetAudit/{employeeId}/{assetId}/{status}")
+	@PreAuthorize("hasAnyAuthority('Admin','User')")
 	public AssetAudit addingAssetAudit(@RequestBody AssetAuditDTO assetAuditDTO,@PathVariable int employeeId,@PathVariable int assetId,@PathVariable String status) {
 		return service.addingAssetAudit(assetAuditDTO, employeeId, assetId, status);
 	}
 	
 	@GetMapping("/displayAllAudits")
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	public List<AssetAudit> displayAllAssetAudit(){
 		return service.displayAllAssetAudit();
 	}

@@ -1,10 +1,13 @@
 package com.hexaware.assetmanagement.service;
 
+import java.lang.StackWalker.Option;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.assetmanagement.dto.EmployeeDTO;
@@ -17,6 +20,9 @@ public class EmployeeServiceImp implements IEmployeeService {
 
 	@Autowired
 	private EmployeeRepository repo;
+	
+	@Autowired 
+	PasswordEncoder passwordEncoder;
 
 	Logger logger = LoggerFactory.getLogger(EmployeeServiceImp.class);
 
@@ -35,7 +41,7 @@ public class EmployeeServiceImp implements IEmployeeService {
 		employee.setEmployeeId(emp.getEmployeeId());
 		employee.setEmployeeName(emp.getEmployeeName());
 		employee.setEmail(emp.getEmail());
-		employee.setPassword(emp.getPassword());
+		employee.setPassword(passwordEncoder.encode(emp.getPassword()));
 		employee.setGender(emp.getGender());
 		employee.setContact(emp.getContact());
 		employee.setAddress(emp.getAddress());
@@ -77,8 +83,8 @@ public class EmployeeServiceImp implements IEmployeeService {
 	}
 
 	@Override
-	public List<Employee> searchEmployeesByName(String employeeName) throws EmployeeNotFoundException {
-		List<Employee> employees = repo.employeesByName(employeeName);
+	public Optional<Employee> searchEmployeesByName(String employeeName) throws EmployeeNotFoundException {
+		Optional<Employee> employees = repo.employeesByName(employeeName);
 
 		if (!employees.isEmpty()) {
 			return employees;

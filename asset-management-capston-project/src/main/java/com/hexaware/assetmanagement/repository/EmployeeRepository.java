@@ -1,6 +1,7 @@
 package com.hexaware.assetmanagement.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +13,10 @@ import com.hexaware.assetmanagement.entities.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	@Query("Select e from Employee e Where e.employeeName LIKE :empName%")
-	public List<Employee> employeesByName(String empName);
+	public Optional<Employee> employeesByName(String empName);
+
+	@Query("Select e from Employee e Where e.email LIKE :email%")
+	 Optional<Employee> findByEmail(String email);
 	
 	
 

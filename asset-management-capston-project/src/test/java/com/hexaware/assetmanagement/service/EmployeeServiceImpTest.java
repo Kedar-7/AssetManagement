@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -60,10 +61,10 @@ class EmployeeServiceImpTest {
 	@Test
 	void testSearchEmployeeByName() throws EmployeeNotFoundException {
 		String employeeName = "Priya Patel";
-        List<Employee> employees = service.searchEmployeesByName(employeeName);
+        Optional<Employee> employees = service.searchEmployeesByName(employeeName);
         assertNotNull(employees);
         assertFalse(employees.isEmpty());
-        assertEquals(employeeName, employees.get(0).getEmployeeName());
+        assertEquals(employeeName, employees.get().getEmployeeName());
 	}
 
 	@Test
