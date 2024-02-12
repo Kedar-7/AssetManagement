@@ -49,22 +49,30 @@ public class AssetRequestImp implements IAssetRequest {
 	}
 
 	@Override
-	public String deleteAssetRequest(int requestId) {
-		 repo.deleteById(requestId);
-		 logger.info("Asset request with ID {} deleted successfully", requestId);
+	public String deleteAssetRequest(int requestId) throws AssetRequestNotFoundException {
+		AssetRequest request = repo.findById(requestId).orElse(null);
+		if(request!= null) {
+			repo.deleteById(requestId);
+			 logger.info("Asset request with ID {} deleted successfully", requestId);
 
-		 return "Request Deleted";
+			 return "Request Deleted";
+		}
+		else throw new AssetRequestNotFoundException("Asset Request with Id: "+requestId+" not found!!");
 	}
 
 	@Override
-	public AssetRequest findRequest(int requestId) {
+	public AssetRequest findRequest(int requestId) throws AssetRequestNotFoundException {
+		AssetRequest request = repo.findById(requestId).orElse(null);
+		if(request != null) {
 	    logger.info("Finding request by ID: {}", requestId);
-	    return repo.findById(requestId).orElse(null);
+	    return repo.findById(requestId).orElse(null);}
+		
+		else throw new AssetRequestNotFoundException("Ässet Request with ID: "+requestId+" not found!!");
 	}
 
 
 	@Override
-	public List<AssetRequest> searchAllRequests() {
+	public List<AssetRequest> displayAllRequest() {
 		logger.info("Fetching all asset requests");
         List<AssetRequest> assetRequests = repo.findAll();
         if (!assetRequests.isEmpty()) {
@@ -94,7 +102,7 @@ public class AssetRequestImp implements IAssetRequest {
 
 	@Override
 	public List<AssetRequest> ViewAssetEmployeeInfo() {
-		// TODO Auto-generated method stub
+		
 		return repo.ViewAssetEmployeeInfo();
 	}
 

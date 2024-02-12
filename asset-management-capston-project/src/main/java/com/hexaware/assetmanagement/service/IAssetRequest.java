@@ -11,11 +11,12 @@ import com.hexaware.assetmanagement.exception.AssetRequestNotFoundException;
 public interface IAssetRequest {
 	
 	public AssetRequest addAssetsRequests(AssetRequestDTO asset,int employeeId,int assetId);
-	public String deleteAssetRequest(int requestId);
-	public AssetRequest findRequest(int requestId);
-    public List<AssetRequest> searchAllRequests();
+	public String deleteAssetRequest(int requestId) throws AssetRequestNotFoundException;
+	public AssetRequest findRequest(int requestId) throws AssetRequestNotFoundException;
+  
     public AssetRequest updateRequestStatus(String status, int requestId) throws AssetRequestNotFoundException;
     public List<AssetRequest> ViewAssetEmployeeInfo();
+	List<AssetRequest> displayAllRequest();
 
     
 }

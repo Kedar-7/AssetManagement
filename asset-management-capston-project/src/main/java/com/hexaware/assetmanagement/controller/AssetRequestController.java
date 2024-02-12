@@ -41,15 +41,15 @@ public class AssetRequestController {
     
     @DeleteMapping("/delete/{requestId}")
 	@PreAuthorize("hasAnyAuthority('Admin')")
-    public String deleteAssetRequest(@PathVariable int requestId) {
+    public String deleteAssetRequest(@PathVariable int requestId) throws AssetRequestNotFoundException {
         logger.info("Deleting asset request with ID {}", requestId);
         service.deleteAssetRequest(requestId);
         return "Request has been deleted";
     }
 
-    @GetMapping("/getbyid/{requestId}") 
+    @GetMapping("/displayById/{requestId}") 
     @PreAuthorize("hasAnyAuthority('Admin')")
-    public AssetRequest findRequest(@PathVariable int requestId) {
+    public AssetRequest findRequest(@PathVariable int requestId) throws AssetRequestNotFoundException {
         logger.info("Fetching asset request with ID {}", requestId);
         return service.findRequest(requestId);
     }
@@ -58,7 +58,7 @@ public class AssetRequestController {
     @PreAuthorize("hasAnyAuthority('Admin')")
     public List<AssetRequest> searchAllRequests(){
         logger.info("Fetching all asset requests");
-        return service.searchAllRequests();
+        return service.displayAllRequest();
     }
     
     @PutMapping("/updateStatus/{status}/{requestId}")

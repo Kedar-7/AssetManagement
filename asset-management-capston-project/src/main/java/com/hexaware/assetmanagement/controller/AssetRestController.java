@@ -18,6 +18,7 @@ import org.springframework.web.service.annotation.DeleteExchange;
 import com.hexaware.assetmanagement.dto.AssetDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.exception.AssetNotFoundException;
+import com.hexaware.assetmanagement.exception.InvalidEntryException;
 import com.hexaware.assetmanagement.service.IAssetService;
 
 
@@ -44,25 +45,25 @@ public class AssetRestController {
 	
 	@PutMapping("/updateAsset")
 	@PreAuthorize("hasAnyAuthority('Admin')")
-	public Asset updateAsset(@RequestBody AssetDTO assetDTO) throws AssetNotFoundException    {
+	public Asset updateAsset(@RequestBody AssetDTO assetDTO) throws AssetNotFoundException, InvalidEntryException    {
 		return service.updateAsset(assetDTO);
 	}
 	
 	@DeleteMapping("/deleteById/{assetId}")
 	@PreAuthorize("hasAnyAuthority('Admin')")
-	public String deleteAssetById(@PathVariable int assetId) {
+	public String deleteAssetById(@PathVariable int assetId) throws AssetNotFoundException {
 		return service.deleteAssetById(assetId);
 	}
 	
 	@GetMapping("/displayAssetById/{assetId}")
 	@PreAuthorize("hasAnyAuthority('Admin','User')")
-	public Asset displayAssetById(@PathVariable int assetId) {
+	public Asset displayAssetById(@PathVariable int assetId) throws AssetNotFoundException {
 		return service.displayAssetById(assetId);
 	}
 	
 	@GetMapping("/displayAssetByCategory/{category}")
 	@PreAuthorize("hasAnyAuthority('Admin','User')")
-	public List<Asset> displayAssetByCategory(@PathVariable String category){
+	public List<Asset> displayAssetByCategory(@PathVariable String category) throws InvalidEntryException{
 		
 		return service.displayAssetByCategory(category);
 		
@@ -70,7 +71,7 @@ public class AssetRestController {
 	
 	@GetMapping("/displayByName/{name}")
 	@PreAuthorize("hasAnyAuthority('Admin','User')")
-	public List<Asset> displayAssetByName(@PathVariable String name){
+	public List<Asset> displayAssetByName(@PathVariable String name) throws InvalidEntryException{
 		
 		return service.displayAssetByName(name);
 		

@@ -11,11 +11,11 @@ import com.hexaware.assetmanagement.entities.Asset;
 @Repository
 public interface AssetRepository extends JpaRepository<Asset, Integer>{
 	
-	@Query("SELECT e FROM Asset e WHERE e.assetCategory = :category")
+	@Query("SELECT e FROM Asset e WHERE e.assetCategory LIKE :category%")
 	public List<Asset> displayAssetByCategory(String category);
 	
 	
-	@Query("SELECT e FROM Asset e WHERE e.assetName = :name")
+	@Query("Select e from Asset e Where e.assetName LIKE :name%")
 	public List<Asset> displayAssetByName(String name);
 
 

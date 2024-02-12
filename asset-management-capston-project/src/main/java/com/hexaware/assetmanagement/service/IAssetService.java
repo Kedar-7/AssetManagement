@@ -6,16 +6,17 @@ import java.util.Optional;
 import com.hexaware.assetmanagement.dto.AssetDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.exception.AssetNotFoundException;
+import com.hexaware.assetmanagement.exception.InvalidEntryException;
 
 public interface IAssetService {
 
 	public Asset addNewAsset(AssetDTO assetDTO);
 	public List<Asset> diplayAllAssets();
-	public Asset updateAsset(AssetDTO assetDTO) throws AssetNotFoundException;
-	public String deleteAssetById(int assetId);
-	public Asset displayAssetById(int assetId);
-	public List<Asset> displayAssetByCategory(String category);
-	public List<Asset> displayAssetByName(String name);
+	public Asset updateAsset(AssetDTO assetDTO) throws AssetNotFoundException, InvalidEntryException;
+	public String deleteAssetById(int assetId) throws AssetNotFoundException;
+	public Asset displayAssetById(int assetId) throws AssetNotFoundException;
+	public List<Asset> displayAssetByCategory(String category) throws InvalidEntryException;
+	public List<Asset> displayAssetByName(String name) throws InvalidEntryException;
 	
 	
 }

@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.hexaware.assetmanagement.dto.AssetDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.exception.AssetNotFoundException;
+import com.hexaware.assetmanagement.exception.InvalidEntryException;
 
 @SpringBootTest
 class AssetServiceImplTest {
@@ -46,7 +47,7 @@ class AssetServiceImplTest {
 	}
 
 	@Test
-	void testDiplayAllAssets() {
+	void testDiplayAllAssets() throws InvalidEntryException {
 		String name = "Laptop";
 
         List<Asset> assets = service.displayAssetByName(name);
@@ -55,7 +56,7 @@ class AssetServiceImplTest {
 	}
 
 	@Test
-	void testUpdateAsset()throws AssetNotFoundException {
+	void testUpdateAsset()throws AssetNotFoundException, InvalidEntryException {
 		AssetDTO assetDTO = new AssetDTO();
         assetDTO.setAssetId(104);
         assetDTO.setAssetName("Updated Laptop");
@@ -72,7 +73,7 @@ class AssetServiceImplTest {
 	}
 
 	@Test
-	void testDeleteAssetById() {
+	void testDeleteAssetById() throws AssetNotFoundException {
 		int assetId = 101;
 
         String result = service.deleteAssetById(assetId);
@@ -81,7 +82,7 @@ class AssetServiceImplTest {
 	}
 
 	@Test
-	void testDisplayAssetById() {
+	void testDisplayAssetById() throws AssetNotFoundException {
 		int assetId = 101;
 
         Asset asset = service.displayAssetById(assetId);
@@ -90,7 +91,7 @@ class AssetServiceImplTest {
 	}
 
 	@Test
-	void testDisplayAssetByCategory() {
+	void testDisplayAssetByCategory() throws InvalidEntryException {
 		String category = "Electronics";
 
         List<Asset> assets = service.displayAssetByCategory(category);
@@ -99,7 +100,7 @@ class AssetServiceImplTest {
 	}
 
 	@Test
-	void testDisplayAssetByName() {
+	void testDisplayAssetByName() throws InvalidEntryException {
 		String name = "Laptop";
 
         List<Asset> assets = service.displayAssetByName(name);

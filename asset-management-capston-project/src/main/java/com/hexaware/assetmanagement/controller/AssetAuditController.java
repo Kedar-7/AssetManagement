@@ -14,6 +14,7 @@ import com.hexaware.assetmanagement.dto.AssetAuditDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.entities.AssetAudit;
 import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
+import com.hexaware.assetmanagement.exception.InvalidEntryException;
 import com.hexaware.assetmanagement.service.IAssetAuditService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -27,7 +28,7 @@ public class AssetAuditController {
 	
 	@PostMapping("/addNewAssetAudit/{employeeId}/{assetId}/{status}")
 	@PreAuthorize("hasAnyAuthority('Admin','User')")
-	public AssetAudit addingAssetAudit(@RequestBody AssetAuditDTO assetAuditDTO,@PathVariable int employeeId,@PathVariable int assetId,@PathVariable String status) {
+	public AssetAudit addingAssetAudit(@RequestBody AssetAuditDTO assetAuditDTO,@PathVariable int employeeId,@PathVariable int assetId,@PathVariable String status) throws InvalidEntryException {
 		return service.addingAssetAudit(assetAuditDTO, employeeId, assetId, status);
 	}
 	

@@ -43,23 +43,28 @@ public class AssetAuditServiceImpl implements IAssetAuditService{
 	}
 
 	@Override
-	public AssetAudit addingAssetAudit(AssetAuditDTO assetAuditDTO, int employeeId, int assetId, String status) {
+	public AssetAudit addingAssetAudit(AssetAuditDTO assetAuditDTO, int employeeId, int assetId, String status) throws InvalidEntryException {
 		Employee emp = employeeRepo.findById(employeeId).orElse(null);
 		Asset asset = assetRepo.findById(assetId).orElse(null);
 		
+		if(emp!=null && asset!=null) {
 		AssetAudit audit = new AssetAudit();
 		audit.setAssetAuditId(assetAuditDTO.getAssetAuditId());
 		audit.setAsset(asset);
 		audit.setEmployee(emp);
-		audit.setStatus(status);
+		if(isValidStatus(status)== true) {
+			audit.setStatus(status);
+		} else throw new InvalidEntryException("Status: "+status+"is invalid enter('Verified' or 'Pending')");
+		return repo.save(audit);}
 		
-		return repo.save(audit);
+		else throw new InvalidEntryException("Invalid Entry");
 		
 	}
 	
-
-
-
-
-
+	public boolean isValidStatus(String status) {
+		if("Verified".equals(status) || "Pending".equals(status)) {
+			return true;
+		}
+		else return false;
+	}
 }
