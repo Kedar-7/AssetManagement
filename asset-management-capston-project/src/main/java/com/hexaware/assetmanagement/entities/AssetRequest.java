@@ -1,9 +1,7 @@
 package com.hexaware.assetmanagement.entities;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,12 +23,12 @@ public class AssetRequest {
     
     private String status = "Pending";
 	
-    @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "AssetID")
     @NotNull
     private Asset asset;
     
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name = "EmployeeID")
 	@NotNull
     private Employee employee;

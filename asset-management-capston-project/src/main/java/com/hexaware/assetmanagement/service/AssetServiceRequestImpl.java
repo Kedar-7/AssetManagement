@@ -2,26 +2,28 @@ package com.hexaware.assetmanagement.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
+
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.aop.ThrowsAdvice;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hexaware.assetmanagement.dto.AssetDTO;
+
 import com.hexaware.assetmanagement.dto.AssetServiceRequestDTO;
 import com.hexaware.assetmanagement.entities.Asset;
+
 import com.hexaware.assetmanagement.entities.AssetServiceRequest;
 import com.hexaware.assetmanagement.entities.Employee;
 import com.hexaware.assetmanagement.exception.AssetNotFoundException;
+import com.hexaware.assetmanagement.exception.AssetRequestNotFoundException;
 import com.hexaware.assetmanagement.exception.AssetServiceRequestNotFoundException;
 import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
+import com.hexaware.assetmanagement.exception.InvalidEntryException;
 import com.hexaware.assetmanagement.repository.AssetRepository;
 import com.hexaware.assetmanagement.repository.AssetServiceRequestRepository;
 import com.hexaware.assetmanagement.repository.EmployeeRepository;
-
-import ch.qos.logback.classic.Logger;
 
 @Service
 public class AssetServiceRequestImpl implements IAssetServiceRequestService {
@@ -35,6 +37,8 @@ public class AssetServiceRequestImpl implements IAssetServiceRequestService {
 	
 	@Autowired
 	EmployeeRepository empRepo;
+
+	Logger logger = LoggerFactory.getLogger(AssetRequestImp.class);
 
 	@Override
 	public String deleteServiceRequestById(int requestId) {
@@ -86,6 +90,29 @@ public class AssetServiceRequestImpl implements IAssetServiceRequestService {
 		
 		else throw new AssetServiceRequestNotFoundException("Service Request of ID: "+requestId+" not found!!");
 		
+	}
+
+	@Override
+	public AssetServiceRequest updateAssetRequestStatus(String status, int requestId) throws InvalidEntryException, AssetRequestNotFoundException {
+
+		AssetServiceRequest assetServiceRequest = repo.findById(requestId).orElse(null);
+		logger.info("Updataing asset request status");
+
+		if(assetServiceRequest != null) {
+			
+			if(isValidStatus(status)) {
+				assetServiceRequest.setStatus(status);
+				return repo.save(assetServiceRequest);
+			}else throw new InvalidEntryException("Status: "+status+"is invalid enter('Approved' or 'Pending')");
+		}
+		else throw new AssetRequestNotFoundException("Asset Request with ID: "+requestId+" doesn't exist!!");
+		
+	}
+	public boolean isValidStatus(String status) {
+		if("Approved".equals(status) || "Pending".equals(status)) {
+			return true;
+		}
+		return false;
 	}
 
 

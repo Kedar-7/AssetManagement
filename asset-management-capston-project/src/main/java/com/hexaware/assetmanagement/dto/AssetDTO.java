@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import com.hexaware.assetmanagement.entities.Asset;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Pattern;
 
 public class AssetDTO {
 

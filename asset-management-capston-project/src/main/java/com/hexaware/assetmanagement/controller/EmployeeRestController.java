@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.management.relation.Role;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,8 +44,11 @@ public class EmployeeRestController {
 	@Autowired
 	AuthenticationManager authenticationManager;
 
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeRestController.class);
+
 	@PostMapping("/addNewEmployee")
 	public Employee addNewAsset(@RequestBody EmployeeDTO employeeDTO) {
+		logger.info("Adding new employee: {}", employeeDTO);
 
 		return service.addEmployee(employeeDTO);
 
@@ -52,13 +57,16 @@ public class EmployeeRestController {
 	@GetMapping("/displayAllEmployees")
 	@PreAuthorize("hasAuthority('Admin')")
 	public List<Employee> diplayAllAssets() {
+		logger.info("Displaying all employees");
+
 		return service.viewAllEmployees();
 
 	}
 
 	@GetMapping("/displayEmployeeById/{employeeId}")
+	@PreAuthorize("hasAuthority('Admin')")
 	public Employee displayEmployeeById(@PathVariable int employeeId) throws EmployeeNotFoundException {
-
+		logger.info("Displaying employee with ID: {}", employeeId);
 		return service.searchEmployeeById(employeeId);
 
 	}
@@ -67,22 +75,23 @@ public class EmployeeRestController {
 	@PreAuthorize("hasAuthority('Admin')")
 	public Optional<Employee> displayEmployeeByName(@PathVariable String employeeName)
 			throws EmployeeNotFoundException {
+		logger.info("Displaying employee with name: {}", employeeName);
 		return service.searchEmployeesByName(employeeName);
 	}
 
 	@PutMapping("/updateEmployeeDetail")
 	@PreAuthorize("hasAuthority('Admin')")
 	public Employee updateEmployeeInfo(@RequestBody EmployeeDTO employeeDTO) {
-
+		logger.info("Updating employee info: {}", employeeDTO);
 		return service.updateEmployeeInfo(employeeDTO);
-
 	}
 
-	
 	@DeleteMapping("/removeEmployeeDetail/{employeeId}")
 	@PreAuthorize("hasAuthority('Admin')")
 
 	public String removeEmployee(@PathVariable int employeeId) {
+		logger.info("Removing employee with ID: {}", employeeId);
+
 		return service.removeEmployee(employeeId);
 	}
 
@@ -94,7 +103,7 @@ public class EmployeeRestController {
 		if (authentication.isAuthenticated()) {
 			token = jwtService.generateToken(authRequest.getemail());
 		} else {
-			throw new UsernameNotFoundException("UserName or Password is invalid");
+			throw new UsernameNotFoundException("Email or Password is invalid");
 		}
 		return token;
 	}

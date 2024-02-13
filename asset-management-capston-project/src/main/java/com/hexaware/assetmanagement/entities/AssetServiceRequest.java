@@ -1,12 +1,7 @@
 package com.hexaware.assetmanagement.entities;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,12 +27,12 @@ public class AssetServiceRequest {
 	@Column(name = "Status")
     private String status;
 
-    @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @ManyToOne( fetch = FetchType.EAGER)
     
     @JoinColumn(name = "AssetID")
     private Asset asset;
     
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "EmployeeId")
     private Employee employee;
 

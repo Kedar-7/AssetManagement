@@ -1,6 +1,5 @@
 package com.hexaware.assetmanagement.dto;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class AssetRequestDTO {

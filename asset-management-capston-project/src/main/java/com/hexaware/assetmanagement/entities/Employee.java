@@ -3,9 +3,7 @@ package com.hexaware.assetmanagement.entities;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -23,15 +21,15 @@ public class Employee {
 	private String address;
 	private String role;
 	
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "employee")
 	@JsonBackReference
     private List<AssetRequest> assetRequests;
 	
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL )
+	@OneToMany(mappedBy = "employee")
 	@JsonBackReference
 	private List<AssetServiceRequest> assetServiceRequests;
 	
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "employee")
     @JsonBackReference
 	private List<AssetAudit> assetAudit;
 

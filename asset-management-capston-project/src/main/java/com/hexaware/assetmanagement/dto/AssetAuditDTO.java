@@ -5,22 +5,18 @@ import java.time.LocalDate;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.entities.Employee;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
+
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Pattern;
 
 public class AssetAuditDTO {
 
 	@Id
 	private int assetAuditId;
 	private LocalDate dateAudited = LocalDate.now();
+	private String status = "Pending";
     private Asset asset;  
     private Employee employee;	
-	private String status = "Pending";
+
 	public int getAssetAuditId() {
 		return assetAuditId;
 	}

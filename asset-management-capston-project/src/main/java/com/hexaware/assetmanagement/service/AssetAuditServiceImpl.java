@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import com.hexaware.assetmanagement.dto.AssetAuditDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.entities.AssetAudit;
-import com.hexaware.assetmanagement.entities.AssetRequest;
+
 import com.hexaware.assetmanagement.entities.Employee;
-import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
+
 import com.hexaware.assetmanagement.exception.InvalidEntryException;
 import com.hexaware.assetmanagement.repository.AssetAuditRepository;
 import com.hexaware.assetmanagement.repository.AssetRepository;
@@ -20,11 +20,10 @@ import com.hexaware.assetmanagement.repository.AssetRequestRepository;
 import com.hexaware.assetmanagement.repository.EmployeeRepository;
 
 @Service
-public class AssetAuditServiceImpl implements IAssetAuditService{
-	
+public class AssetAuditServiceImpl implements IAssetAuditService {
+
 	Logger logger = LoggerFactory.getLogger(AssetAuditServiceImpl.class);
 
-	
 	@Autowired
 	AssetRequestRepository requestRepo;
 
@@ -33,38 +32,52 @@ public class AssetAuditServiceImpl implements IAssetAuditService{
 
 	@Autowired
 	EmployeeRepository employeeRepo;
-	
-	@Autowired 
+
+	@Autowired
 	AssetRepository assetRepo;
 
 	@Override
 	public List<AssetAudit> displayAllAssetAudit() {
+		logger.info("Fetching all asset audits");
 		return repo.findAll();
 	}
 
 	@Override
-	public AssetAudit addingAssetAudit(AssetAuditDTO assetAuditDTO, int employeeId, int assetId, String status) throws InvalidEntryException {
+	public AssetAudit addingAssetAudit(AssetAuditDTO assetAuditDTO, int employeeId, int assetId, String status)
+			throws InvalidEntryException {
+		logger.info("Adding new asset audit with details: {}", assetAuditDTO);
 		Employee emp = employeeRepo.findById(employeeId).orElse(null);
 		Asset asset = assetRepo.findById(assetId).orElse(null);
-		
-		if(emp!=null && asset!=null) {
-		AssetAudit audit = new AssetAudit();
-		audit.setAssetAuditId(assetAuditDTO.getAssetAuditId());
-		audit.setAsset(asset);
-		audit.setEmployee(emp);
-		if(isValidStatus(status)== true) {
-			audit.setStatus(status);
-		} else throw new InvalidEntryException("Status: "+status+"is invalid enter('Verified' or 'Pending')");
-		return repo.save(audit);}
-		
-		else throw new InvalidEntryException("Invalid Entry");
-		
-	}
-	
-	public boolean isValidStatus(String status) {
-		if("Verified".equals(status) || "Pending".equals(status)) {
-			return true;
+
+		if (emp != null && asset != null) {
+			AssetAudit audit = new AssetAudit();
+			audit.setAssetAuditId(assetAuditDTO.getAssetAuditId());
+			audit.setAsset(asset);
+			audit.setEmployee(emp);
+			if (isValidStatus(status)) {
+				audit.setStatus(status);
+			} else
+				throw new InvalidEntryException("Status: " + status + "is invalid enter('Verified' or 'Pending')");
+			return repo.save(audit);
 		}
-		else return false;
+
+		else
+			throw new InvalidEntryException("Invalid Entry");
+
 	}
+
+	public boolean isValidStatus(String status) {
+		if ("Verified".equals(status) || "Pending".equals(status)) {
+			return true;
+		} else
+			return false;
+	}
+
+	@Override
+	public String removeAuditRequest(int assetAuditId) {
+		logger.info("Deleting asset audit details");
+		repo.deleteById(assetAuditId);
+		return "Audit deleted";
+	}
+
 }

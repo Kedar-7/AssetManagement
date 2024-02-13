@@ -1,17 +1,16 @@
 package com.hexaware.assetmanagement.entities;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Pattern;
+
 
 @Entity
 public class AssetAudit {
@@ -20,17 +19,18 @@ public class AssetAudit {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int assetAuditId;
 	private LocalDate dateAudited = LocalDate.now();
+	private String status;
 	
-	@ManyToOne(cascade = CascadeType.ALL )
+	@ManyToOne
     @JoinColumn(name = "AssetID")
     private Asset asset;
     
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name = "EmployeeID")
     private Employee employee;
 	
 
-	private String status;
+
 
 	public int getAssetAuditId() {
 		return assetAuditId;

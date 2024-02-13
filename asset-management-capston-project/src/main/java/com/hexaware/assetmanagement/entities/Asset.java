@@ -3,10 +3,10 @@ package com.hexaware.assetmanagement.entities;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -55,17 +55,17 @@ public class Asset {
 	    @Column(name= "Status")
 	    private String status;
 	    
-	    @OneToMany(mappedBy = "asset" ,cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+	    @OneToMany(mappedBy = "asset" , fetch = FetchType.EAGER)
 //	    @JsonBackReference
 	    @JsonIgnore
 	    private List<AssetServiceRequest> assetServiceRequest;
 	    
 	    @JsonIgnore
-		@OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
+		@OneToMany(mappedBy = "asset")
 //	    @JsonBackReference
 	    private List<AssetRequest> assetRequests;
 	    @JsonIgnore
-		@OneToMany(mappedBy = "asset", cascade = CascadeType.ALL)
+		@OneToMany(mappedBy = "asset")
 //	    @JsonBackReference
 		private List<AssetAudit> assetAudit;
 	
