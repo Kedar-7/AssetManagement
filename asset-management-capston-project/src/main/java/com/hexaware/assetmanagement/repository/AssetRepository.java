@@ -18,5 +18,7 @@ public interface AssetRepository extends JpaRepository<Asset, Integer>{
 	@Query("Select e from Asset e Where e.assetName LIKE :name%")
 	public List<Asset> displayAssetByName(String name);
 
+	@Query("Select a from Asset a Where a.status = 'Available'")
+	public List<Asset> displayAvailableAssets();
 
 }

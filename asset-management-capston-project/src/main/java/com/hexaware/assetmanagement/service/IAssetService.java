@@ -22,5 +22,7 @@ public interface IAssetService {
 	public List<Asset> displayAssetByCategory(String category) throws InvalidEntryException;
 
 	public List<Asset> displayAssetByName(String name) throws InvalidEntryException;
+	
+	public List<Asset> displayAvailableAssets() throws AssetNotFoundException;
 
 }

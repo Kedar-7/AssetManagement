@@ -39,7 +39,6 @@ public class AssetServiceImpl implements IAssetService {
 
 	@Override
 	public List<Asset> diplayAllAssets() {
-		// TODO Auto-generated method stub
 		return repo.findAll();
 	}
 
@@ -74,10 +73,7 @@ public class AssetServiceImpl implements IAssetService {
 	}
 	
 	public boolean isValidStatus(String status) {
-		if("Available".equals(status) || "In Use".equals(status)) {
-			return true;
-		}
-		return false;
+		return ("Available".equals(status) || "In Use".equals(status));
 	}
 
 	@Override
@@ -121,6 +117,19 @@ public class AssetServiceImpl implements IAssetService {
 			return repo.displayAssetByName(name);
 		}
 		throw new InvalidEntryException("Asset Name: " +name+ " doesn't exist!!");
+	}
+
+
+	@Override
+	public List<Asset> displayAvailableAssets() throws AssetNotFoundException {
+		List<Asset> assetList = repo.displayAvailableAssets();
+		if(assetList!=null) {
+			return assetList;
+		}
+		else throw new AssetNotFoundException("No Asset Available!!");
+		
+		
+		
 	}
 
 }

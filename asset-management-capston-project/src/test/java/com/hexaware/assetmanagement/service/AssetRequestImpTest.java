@@ -17,7 +17,10 @@ import com.hexaware.assetmanagement.dto.AssetRequestDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.entities.AssetRequest;
 import com.hexaware.assetmanagement.entities.Employee;
+import com.hexaware.assetmanagement.exception.AssetNotFoundException;
 import com.hexaware.assetmanagement.exception.AssetRequestNotFoundException;
+import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
+import com.hexaware.assetmanagement.exception.InvalidEntryException;
 import com.hexaware.assetmanagement.repository.AssetRepository;
 import com.hexaware.assetmanagement.repository.AssetRequestRepository;
 import com.hexaware.assetmanagement.repository.EmployeeRepository;
@@ -42,7 +45,7 @@ class AssetRequestImpTest {
 	}
 
 	@Test
-	void testAddAssets() {
+	void testAddAssets() throws AssetNotFoundException, InvalidEntryException, EmployeeNotFoundException {
 		
         Employee employee = new Employee();
         employee.setEmployeeId(1);

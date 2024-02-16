@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.hexaware.assetmanagement.dto.AssetRequestDTO;
 import com.hexaware.assetmanagement.entities.AssetRequest;
+import com.hexaware.assetmanagement.exception.AssetNotFoundException;
 import com.hexaware.assetmanagement.exception.AssetRequestNotFoundException;
+import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
 import com.hexaware.assetmanagement.exception.InvalidEntryException;
 
 public interface IAssetRequest {
 
-	public AssetRequest addAssetsRequests(AssetRequestDTO asset, int employeeId, int assetId);
+	public AssetRequest addAssetsRequests(AssetRequestDTO asset, int employeeId, int assetId) throws AssetNotFoundException, InvalidEntryException, EmployeeNotFoundException;
 
 	public String deleteAssetRequest(int requestId) throws AssetRequestNotFoundException;
 

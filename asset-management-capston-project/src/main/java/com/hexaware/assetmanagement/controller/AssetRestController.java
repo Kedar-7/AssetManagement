@@ -85,5 +85,10 @@ public class AssetRestController {
 		return service.displayAssetByName(name);
 
 	}
+	
+	@GetMapping("/displayAvailableAssets")
+	public List<Asset> displayAvailableAssets() throws AssetNotFoundException{
+		return service.displayAvailableAssets();
+	}
 
 }

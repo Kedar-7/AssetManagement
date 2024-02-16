@@ -11,7 +11,9 @@ import com.hexaware.assetmanagement.dto.AssetRequestDTO;
 import com.hexaware.assetmanagement.entities.Asset;
 import com.hexaware.assetmanagement.entities.AssetRequest;
 import com.hexaware.assetmanagement.entities.Employee;
+import com.hexaware.assetmanagement.exception.AssetNotFoundException;
 import com.hexaware.assetmanagement.exception.AssetRequestNotFoundException;
+import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
 import com.hexaware.assetmanagement.exception.InvalidEntryException;
 import com.hexaware.assetmanagement.repository.AssetRepository;
 import com.hexaware.assetmanagement.repository.AssetRequestRepository;
@@ -32,16 +34,24 @@ public class AssetRequestImp implements IAssetRequest {
 	Logger logger = LoggerFactory.getLogger(AssetRequestImp.class);
 
 	@Override
-	public AssetRequest addAssetsRequests(AssetRequestDTO assetDTO, int employeeId, int assetId) {
+	public AssetRequest addAssetsRequests(AssetRequestDTO assetDTO, int employeeId, int assetId) throws AssetNotFoundException, InvalidEntryException, EmployeeNotFoundException {
 		Employee emp = empRepo.findById(employeeId).orElse(null);
 		Asset asset = assetRepo.findById(assetId).orElse(null);
-		logger.info("Asset request added successfully: {}", assetDTO);
-		AssetRequest assetRequest = new AssetRequest();
-		assetRequest.setRequestId(assetDTO.getRequestId());
-		assetRequest.setRequestType(assetDTO.getRequestType());
-		assetRequest.setEmployee(emp);
-		assetRequest.setAsset(asset);
-		return repo.save(assetRequest);
+		
+		if(emp!= null && asset!=null) {
+			logger.info("Asset request added successfully: {}", assetDTO);
+			AssetRequest assetRequest = new AssetRequest();
+			assetRequest.setRequestId(assetDTO.getRequestId());
+			assetRequest.setRequestType(assetDTO.getRequestType());
+			assetRequest.setEmployee(emp);
+			assetRequest.setAsset(asset);
+			return repo.save(assetRequest);
+		}
+		else if(emp!=null && asset==null) { throw new AssetNotFoundException("Asset ID:" +asset+" not found"); }
+		else if(emp==null && asset!=null) { throw new EmployeeNotFoundException("Employee ID: "+employeeId+" not found"); }
+		else throw new InvalidEntryException("Employee Id: "+employeeId+" Asset Id: "+assetId);
+		
+		
 	}
 
 	@Override

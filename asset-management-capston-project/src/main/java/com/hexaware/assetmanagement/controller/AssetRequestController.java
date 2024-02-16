@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.assetmanagement.dto.AssetRequestDTO;
 import com.hexaware.assetmanagement.entities.AssetRequest;
+import com.hexaware.assetmanagement.exception.AssetNotFoundException;
 import com.hexaware.assetmanagement.exception.AssetRequestNotFoundException;
+import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
 import com.hexaware.assetmanagement.exception.InvalidEntryException;
 import com.hexaware.assetmanagement.service.IAssetRequest;
 
@@ -34,7 +36,7 @@ public class AssetRequestController {
 	@PostMapping("/add/{employeeId}/{assetId}")
 	@PreAuthorize("hasAnyAuthority('Admin','User')")
 	public AssetRequest addAssetsRequests(@RequestBody AssetRequestDTO asset, @PathVariable int employeeId,
-			@PathVariable int assetId) {
+			@PathVariable int assetId) throws AssetNotFoundException, InvalidEntryException, EmployeeNotFoundException {
 		logger.info("Adding asset request for employee ID {} and asset ID {}", employeeId, assetId);
 		return service.addAssetsRequests(asset, employeeId, assetId);
 	}
