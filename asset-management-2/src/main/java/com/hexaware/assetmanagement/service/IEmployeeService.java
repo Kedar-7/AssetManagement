@@ -13,7 +13,7 @@ public interface IEmployeeService {
 	public Employee addEmployee(EmployeeDTO emp);
 	public Employee searchEmployeeById(int employeeId) throws EmployeeNotFoundException;
 
-	public Employee updateEmployeeInfo(Employee employee);
+	public Employee updateEmployeeInfo(EmployeeDTO employee);
 
 	public String removeEmployee(int employeeId);
 	

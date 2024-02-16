@@ -57,8 +57,10 @@ public class AssetRequestImp implements IAssetRequest {
 
 	@Override
 	public AssetRequest findRequest(int requestId) {
-		return repo.findById(requestId).orElse(null);
+	    logger.info("Finding request by ID: {}", requestId);
+	    return repo.findById(requestId).orElse(null);
 	}
+
 
 	@Override
 	public List<AssetRequest> searchAllRequests() {

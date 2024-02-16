@@ -23,7 +23,7 @@ public interface IAssetServiceRequestService {
 	public AssetServiceRequest displayRequestById(int requestId) throws AssetServiceRequestNotFoundException;
 
 
-	AssetServiceRequest addServiceRequest(AssetServiceRequestDTO assetserviceDTO, int assetId, int employeeId)
+	public AssetServiceRequest addServiceRequest(AssetServiceRequestDTO assetserviceDTO, int assetId, int employeeId)
 			throws AssetNotFoundException, EmployeeNotFoundException;
 	
 }

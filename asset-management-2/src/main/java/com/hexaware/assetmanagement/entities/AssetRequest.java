@@ -1,5 +1,6 @@
 package com.hexaware.assetmanagement.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -19,7 +20,8 @@ public class AssetRequest {
 	
 
     private String requestType;
-    private Date dateRequested;
+    private LocalDate dateRequested;
+    
     private String status;
 	
     @ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
@@ -50,11 +52,11 @@ public class AssetRequest {
 		this.requestType = requestType;
 	}
 
-	public Date getDateRequested() {
+	public LocalDate getDateRequested() {
 		return dateRequested;
 	}
 
-	public void setDateRequested(Date dateRequested) {
+	public void setDateRequested(LocalDate dateRequested) {
 		this.dateRequested = dateRequested;
 	}
 

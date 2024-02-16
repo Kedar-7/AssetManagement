@@ -1,6 +1,7 @@
 package com.hexaware.assetmanagement.dto;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class AssetRequestDTO {
 	
@@ -8,7 +9,7 @@ public class AssetRequestDTO {
 	    
 	    private int requestId;
 	    private String requestType;
-	    private Date dateRequested;
+	    private LocalDate dateRequested;
 	    private String status;
 	    private int employeeId; 
 	    private int assetId;
@@ -17,7 +18,7 @@ public class AssetRequestDTO {
 			super();
 		}
 
-		public AssetRequestDTO(int requestId, String requestType, Date dateRequested, String status, int employeeId,
+		public AssetRequestDTO(int requestId, String requestType, LocalDate dateRequested, String status, int employeeId,
 				int assetId) {
 			super();
 			this.requestId = requestId;
@@ -44,11 +45,11 @@ public class AssetRequestDTO {
 			this.requestType = requestType;
 		}
 
-		public Date getDateRequested() {
+		public LocalDate getDateRequested() {
 			return dateRequested;
 		}
 
-		public void setDateRequested(Date dateRequested) {
+		public void setDateRequested(LocalDate dateRequested) {
 			this.dateRequested = dateRequested;
 		}
 

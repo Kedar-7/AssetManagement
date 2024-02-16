@@ -3,6 +3,8 @@ package com.hexaware.assetmanagement.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,56 +23,55 @@ import com.hexaware.assetmanagement.service.IAssetService;
 
 
 
+
 @RestController
 @RequestMapping("/asset")
-
 public class AssetRestController {
-	
-	@Autowired
-	IAssetService service;
-	@PostMapping("/addNewAsset")
-	public Asset addNewAsset(@RequestBody AssetDTO assetDTO) {
-		
-		return service.addNewAsset(assetDTO);
-		
-	}
-	
-	@GetMapping("/displayAllAssets")
-	public List<Asset> diplayAllAssets(){
-		return service.diplayAllAssets();
-		
-	
-	}
-	
-	@PutMapping("/updateAsset")
-	public Asset updateAsset(@RequestBody AssetDTO assetDTO) throws AssetNotFoundException    {
-		return service.updateAsset(assetDTO);
-	}
-	
-	@DeleteMapping("/deleteById/{assetId}")
-	public String deleteAssetById(@PathVariable int assetId) {
-		return service.deleteAssetById(assetId);
-	}
-	
-	@GetMapping("/displayAssetById/{assetId}")
-	public Optional<Asset> displayAssetById(@PathVariable int assetId) {
-		return service.displayAssetById(assetId);
-	}
-	
-	@GetMapping("/displayAssetByCategory/{category}")
-	public List<Asset> displayAssetByCategory(@PathVariable String category){
-		
-		return service.displayAssetByCategory(category);
-		
-	}
-	
-	@GetMapping("/displayByName/{name}")
-	public List<Asset> displayAssetByName(@PathVariable String name){
-		
-		return service.displayAssetByName(name);
-		
-	}
-	
-
-
+    
+    @Autowired
+    private IAssetService service;
+    
+    private static final Logger logger = LoggerFactory.getLogger(AssetRestController.class);
+    
+    @PostMapping("/addNewAsset")
+    public Asset addNewAsset(@RequestBody AssetDTO assetDTO) {
+        logger.info("Adding new asset: {}", assetDTO);
+        return service.addNewAsset(assetDTO);
+    }
+    
+    @GetMapping("/displayAllAssets")
+    public List<Asset> diplayAllAssets(){
+        logger.info("Displaying all assets");
+        return service.diplayAllAssets();
+    }
+    
+    @PutMapping("/updateAsset")
+    public Asset updateAsset(@RequestBody AssetDTO assetDTO) throws AssetNotFoundException    {
+        logger.info("Updating asset with ID: {}", assetDTO.getAssetId());
+        return service.updateAsset(assetDTO);
+    }
+    
+    @DeleteMapping("/deleteById/{assetId}")
+    public String deleteAssetById(@PathVariable int assetId) {
+        logger.info("Deleting asset with ID: {}", assetId);
+        return service.deleteAssetById(assetId);
+    }
+    
+    @GetMapping("/displayAssetById/{assetId}")
+    public Asset displayAssetById(@PathVariable int assetId) {
+        logger.info("Displaying asset with ID: {}", assetId);
+        return service.displayAssetById(assetId);
+    }
+    
+    @GetMapping("/displayAssetByCategory/{category}")
+    public List<Asset> displayAssetByCategory(@PathVariable String category){
+        logger.info("Displaying assets by category: {}", category);
+        return service.displayAssetByCategory(category);
+    }
+    
+    @GetMapping("/displayByName/{name}")
+    public List<Asset> displayAssetByName(@PathVariable String name){
+        logger.info("Displaying assets by name: {}", name);
+        return service.displayAssetByName(name);
+    }
 }

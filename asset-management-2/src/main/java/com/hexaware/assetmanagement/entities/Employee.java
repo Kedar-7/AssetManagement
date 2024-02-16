@@ -9,16 +9,23 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Employee {
 	
 	@Id
 	private int employeeId;
+	@Pattern(regexp = "^[A-Z][a-z]*\\s[A-Z][a-z]*$")
 	private String employeeName;
+	@NotNull
 	private String email;
+	@Size(min = 6, message = "Password must have at least 6 characters")
 	private String password;
 	private String gender;
+	@NotNull
 	private String contact;
 	private String address;
 	private String role;

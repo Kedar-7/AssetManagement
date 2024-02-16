@@ -12,67 +12,81 @@ import com.hexaware.assetmanagement.entities.Employee;
 import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
 import com.hexaware.assetmanagement.repository.EmployeeRepository;
 
+
+
 @Service
 public class EmployeeServiceImp implements IEmployeeService {
 
-	@Autowired
-	private EmployeeRepository repo;
+    @Autowired
+    private EmployeeRepository repo;
 
-	Logger logger = LoggerFactory.getLogger(EmployeeServiceImp.class);
+    private Logger logger = LoggerFactory.getLogger(EmployeeServiceImp.class);
 
-	@Override
-	public List<Employee> viewAllEmployees() {
+    @Override
+    public List<Employee> viewAllEmployees() {
+        logger.info("Fetching all employees from the database");
+        return repo.findAll();
+    }
 
-		return repo.findAll();
-	}
+    @Override
+    public Employee addEmployee(EmployeeDTO emp) {
+        logger.info("Adding employee: {}", emp);
+        Employee employee = new Employee();
+        employee.setEmployeeId(emp.getEmployeeId());
+        employee.setEmployeeName(emp.getEmployeeName());
+        employee.setEmail(emp.getEmail());
+        employee.setPassword(emp.getPassword());
+        employee.setGender(emp.getGender());
+        employee.setContact(emp.getContact());
+        employee.setAddress(emp.getAddress());
+        employee.setRole(emp.getRole());
+        return repo.save(employee);
+    }
 
-	@Override
-	public Employee addEmployee(EmployeeDTO emp) {
+    @Override
+    public Employee searchEmployeeById(int employeeId) throws EmployeeNotFoundException {
+        logger.info("Searching for employee with ID: {}", employeeId);
+        Employee emp = repo.findById(employeeId).orElse(null);
+        if (emp != null) {
+            return emp;
+        } else {
+            logger.warn("Employee with ID {} not found", employeeId);
+            throw new EmployeeNotFoundException("Employee with ID " + employeeId + " not found.");
+        }
+    }
 
-		logger.info(emp + " is Added from Add Service");
+    @Override
+    public Employee updateEmployeeInfo(EmployeeDTO employee) {
+        logger.info("Updating employee information: {}", employee);
+        Employee updatedEmployee = new Employee();
+        updatedEmployee.setEmployeeId(employee.getEmployeeId());
+        updatedEmployee.setEmployeeName(employee.getEmployeeName());
+        updatedEmployee.setEmail(employee.getEmail());
+        updatedEmployee.setPassword(employee.getPassword());
+        updatedEmployee.setGender(employee.getGender());
+        updatedEmployee.setContact(employee.getContact());
+        updatedEmployee.setAddress(employee.getAddress());
+        updatedEmployee.setRole(employee.getRole());
+        return repo.save(updatedEmployee);
+    }
 
-		Employee employee = new Employee();
-		employee.setEmployeeId(emp.getEmployeeId());
-		employee.setEmployeeName(emp.getEmployeeName());
-		employee.setEmail(emp.getEmail());
-		employee.setPassword(emp.getPassword());
-		employee.setGender(emp.getGender());
-		employee.setContact(emp.getContact());
-		employee.setAddress(emp.getAddress());
-		employee.setRole(emp.getRole());
-		return repo.save(employee);
-	}
+    @Override
+    public String removeEmployee(int employeeId) {
+        logger.info("Removing employee with ID: {}", employeeId);
+        repo.deleteById(employeeId);
+        return "Employee has been removed";
+    }
 
-	@Override
-	public Employee searchEmployeeById(int employeeId) throws EmployeeNotFoundException {
-		Employee emp = repo.findById(employeeId).orElse(null);
-		if (emp != null) {
-			return emp;
-		} else
-			throw new EmployeeNotFoundException("Employee with employeeId:: " + employeeId + " doesn't esxist!!");
+    @Override
+    public List<Employee> searchEmployeesByName(String employeeName) throws EmployeeNotFoundException {
+        logger.info("Searching employees by name: {}", employeeName);
+        List<Employee> employees = repo.employeesByName(employeeName);
 
-	}
-
-	@Override
-	public Employee updateEmployeeInfo(Employee employee) {
-		return repo.save(employee);
-	}
-
-	@Override
-	public String removeEmployee(int employeeId) {
-		repo.deleteById(employeeId);
-		return "Employee has been removed";
-	}
-
-	@Override
-	public List<Employee> searchEmployeesByName(String employeeName) throws EmployeeNotFoundException {
-		List<Employee> employees = repo.employeesByName(employeeName);
-
-		if (!employees.isEmpty()) {
-			return employees;
-		} else {
-			throw new EmployeeNotFoundException("Employee with name " + employeeName + " not found.");
-		}
-	}
-
+        if (!employees.isEmpty()) {
+            return employees;
+        } else {
+            logger.warn("No employees found with name: {}", employeeName);
+            throw new EmployeeNotFoundException("Employee with name " + employeeName + " not found.");
+        }
+    }
 }

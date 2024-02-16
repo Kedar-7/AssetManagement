@@ -2,6 +2,8 @@ package com.hexaware.assetmanagement.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,35 +22,35 @@ import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
 import com.hexaware.assetmanagement.service.IAssetServiceRequestService;
 
 @RestController
-@RequestMapping("/asseetServiceRequest")
+@RequestMapping("/assetServiceRequest")
 public class AssetServiceRequestRestController {
 
-	@Autowired
-	IAssetServiceRequestService service;
+    @Autowired
+    private IAssetServiceRequestService service;
 
+    private static final Logger logger = LoggerFactory.getLogger(AssetServiceRequestRestController.class);
 
-	@PostMapping("/addNewRequest/{assetId}/{employeeId}")
-	public AssetServiceRequest addServiceRequest(@RequestBody AssetServiceRequestDTO assetserviceDTO,@PathVariable int assetId , @PathVariable int employeeId) throws AssetNotFoundException, EmployeeNotFoundException{
-		
-		return service.addServiceRequest(assetserviceDTO, assetId,employeeId);
-	}
+    @PostMapping("/addNewRequest/{assetId}/{employeeId}")
+    public AssetServiceRequest addServiceRequest(@RequestBody AssetServiceRequestDTO assetserviceDTO, @PathVariable int assetId, @PathVariable int employeeId) throws AssetNotFoundException, EmployeeNotFoundException {
+        logger.info("Adding new service request: {}", assetserviceDTO);
+        return service.addServiceRequest(assetserviceDTO, assetId, employeeId);
+    }
 
-	@DeleteMapping("deleteById/{requestId}")
-	public String deleteServiceRequestById(@PathVariable int requestId) {
-		
-		return service.deleteServiceRequestById(requestId);
-	}
-	
-	
-	@GetMapping("/displayAllRequests")
-	public List<AssetServiceRequest> displayAllServiceRequest(){
-		
-		return service.displayAllServiceRequest();
-	}
-	
-	@GetMapping("/displayById/{requestId}")
-	public AssetServiceRequest displayServiceRequestById(@PathVariable int requestId) throws AssetServiceRequestNotFoundException {
-		return service.displayRequestById(requestId);
-	}
+    @DeleteMapping("/deleteById/{requestId}")
+    public String deleteServiceRequestById(@PathVariable int requestId) {
+        logger.info("Deleting service request with ID: {}", requestId);
+        return service.deleteServiceRequestById(requestId);
+    }
 
+    @GetMapping("/displayAllRequests")
+    public List<AssetServiceRequest> displayAllServiceRequest() {
+        logger.info("Displaying all service requests");
+        return service.displayAllServiceRequest();
+    }
+
+    @GetMapping("/displayById/{requestId}")
+    public AssetServiceRequest displayServiceRequestById(@PathVariable int requestId) throws AssetServiceRequestNotFoundException {
+        logger.info("Displaying service request with ID: {}", requestId);
+        return service.displayRequestById(requestId);
+    }
 }

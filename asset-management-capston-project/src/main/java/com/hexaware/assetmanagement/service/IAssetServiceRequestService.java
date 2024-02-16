@@ -1,0 +1,33 @@
+package com.hexaware.assetmanagement.service;
+
+import java.util.List;
+
+
+import com.hexaware.assetmanagement.dto.AssetServiceRequestDTO;
+
+import com.hexaware.assetmanagement.entities.AssetServiceRequest;
+import com.hexaware.assetmanagement.exception.AssetNotFoundException;
+import com.hexaware.assetmanagement.exception.AssetRequestNotFoundException;
+import com.hexaware.assetmanagement.exception.AssetServiceRequestNotFoundException;
+import com.hexaware.assetmanagement.exception.EmployeeNotFoundException;
+import com.hexaware.assetmanagement.exception.InvalidEntryException;
+
+public interface IAssetServiceRequestService {
+	
+
+	
+	public String deleteServiceRequestById(int requestId);
+
+	public List<AssetServiceRequest> displayAllServiceRequest();
+
+
+	
+	public AssetServiceRequest displayRequestById(int requestId) throws AssetServiceRequestNotFoundException;
+
+
+	AssetServiceRequest addServiceRequest(AssetServiceRequestDTO assetserviceDTO, int assetId, int employeeId)
+			throws AssetNotFoundException, EmployeeNotFoundException;
+	
+	  public AssetServiceRequest updateAssetRequestStatus( String status , int requestId) throws InvalidEntryException, AssetRequestNotFoundException;
+	
+}
