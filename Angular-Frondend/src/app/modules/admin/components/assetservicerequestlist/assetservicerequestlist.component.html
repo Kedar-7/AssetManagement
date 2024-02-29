@@ -1,0 +1,26 @@
+<p>assetservicerequestlist works!</p>
+<h2> Asset Service Request List</h2>
+<table class = "table table table-hover">
+    <thead>
+        <tr>
+            <th>Service Request Id</th>
+            <th> Issue Type </th>
+            <th>  Date Requested </th>
+            <th> Status </th>
+            <th> Asset Id </th>
+            <th> Employee Id </th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let asset of   assetServiceRequestList" >
+            <td> {{ asset.serviceRequestId }} </td>
+            <td> {{ asset.issueType }} </td>
+            <td> {{ asset.dateRequested }} </td>
+            <td> {{ asset.status }} </td>
+            <td> {{ asset.assetId }}  </td>
+            <td> {{ asset.employeeId }}  </td>
+            <td> <button type="button" class="btn btn-danger"  (click)="deleteById(asset.serviceRequestId)">Delete</button>  </td>
+        </tr>
+    </tbody>
+</table>

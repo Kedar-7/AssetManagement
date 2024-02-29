@@ -1,0 +1,128 @@
+<!--
+<div class="heading">
+  <h4>Request for New Asset</h4>
+</div>
+
+
+<div class="form">
+    <form   [formGroup]="assetRequestForm" (ngSubmit)="onSubmit(assetRequestForm)" >
+    
+        <div >
+            <label>Date of Request</label>  
+            <input type="date"  formControlName="date"  class="form-control" [ngClass]="{'is-invalid':submitted && f['date'].errors}">
+            <div *ngIf="submitted && f['date'].errors" class="invalid-feedback"></div>
+            <div style="color: red;"  *ngIf="f['date'].errors?.['required']">Required</div>
+        </div>
+        
+      
+        
+     <div >
+        <label>Request Type</label>  
+        <select name="requestType" id="requestType">
+            <option value="electronics" disabled selected hidden>Select</option>
+            <option value="saab">Borrorw</option>
+            <option value="mercedes">Return</option>
+          </select>
+        <div *ngIf="submitted && f['requestType'].errors" class="invalid-feedback"></div>
+        <div style="color: red;"  *ngIf="f['requestType'].errors?.['required']">Required</div>
+    </div>
+     
+     <div >
+        <label>Status</label>  
+        <select name="status" id="status">
+            <option value="electronics" disabled selected hidden>Select</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+          </select>
+        <div *ngIf="submitted && f['status'].errors" class="invalid-feedback"></div>
+        <div style="color: red;"  *ngIf="f['status'].errors?.['required']">Required</div>
+    </div>
+         
+      <div >
+             <label>Asset ID</label>  
+             <input type="text"  formControlName="assetId"  class="form-control" [ngClass]="{'is-invalid':submitted && f['assetId'].errors}">
+             <div *ngIf="submitted && f['assetId'].errors" class="invalid-feedback"></div>
+             <div style="color: red;"  *ngIf="f['assetId'].errors?.['required']">Required</div>
+     </div>
+    
+      <div >
+             <label>Employee ID</label>  
+             <input type="text"  formControlName="employeeId"  class="form-control" [ngClass]="{'is-invalid':submitted && f['employeeId'].errors}">
+             <div *ngIf="submitted && f['employeeId'].errors" class="invalid-feedback"></div>
+             <div style="color: red;"  *ngIf="f['employeeId'].errors?.['required']">Required</div>
+     </div>
+    
+
+
+
+     
+         <button type="submit"     [disabled]="assetRequestForm.invalid">Request</button>
+     
+     </form>
+    </div>
+    -->
+
+    <div class="container">
+    <div class="heading">
+      <h4>Request for New Asset</h4>
+    </div>
+    
+    
+    <div class="form">
+        <form   [formGroup]="assetRequestForm" (ngSubmit)="onAssetRequestFormSubmit()" >
+        
+            <div >
+                <label>Date of Request</label>  
+                <input type="date"  formControlName="dateRequested"  class="form-control" [ngClass]="{'is-invalid':submitted && f['dateRequested'].errors}">
+                <div *ngIf="submitted && f['dateRequested'].errors" class="invalid-feedback"></div>
+                <div style="color: red;"  *ngIf="f['dateRequested'].errors?.['required']">Required</div>
+            </div>
+            
+          
+            
+         <div >
+            <label>Request Type</label>  
+            <select name="requestType" id="requestType" formControlName="requestType"  class="form-control">
+                <option value="" disabled selected hidden>Select</option>
+                <option value="Borrow">Borrow</option>
+                <option value="Return">Return</option>
+              </select>
+            <div *ngIf="submitted && f['requestType'].errors" class="invalid-feedback"></div>
+            <div style="color: red;"  *ngIf="f['requestType'].errors?.['required']">Required</div>
+        </div>
+         
+         <div >
+            <label>Status</label>  
+            <select name="status" id="status" formControlName="status"  class="form-control">
+                <option value="" disabled selected hidden>Select</option>
+                <option value="Approved">Approved</option>
+                <option value="Pending">Pending</option>
+              </select>
+            <div *ngIf="submitted && f['status'].errors" class="invalid-feedback"></div>
+            <div style="color: red;"  *ngIf="f['status'].errors?.['required']">Required</div>
+        </div>
+             
+          <div >
+                 <label>Asset ID</label>  
+                 <input type="number"  formControlName="assetId"  class="form-control" [ngClass]="{'is-invalid':submitted && f['assetId'].errors}">
+                 <div *ngIf="submitted && f['assetId'].errors" class="invalid-feedback"></div>
+                 <div style="color: red;"  *ngIf="f['assetId'].errors?.['required']">Required</div>
+         </div>
+        
+          <div >
+                 <label>Employee ID</label>  
+                 <input type="number"  formControlName="employeeId"  class="form-control" [ngClass]="{'is-invalid':submitted && f['employeeId'].errors}">
+                 <div *ngIf="submitted && f['employeeId'].errors" class="invalid-feedback"></div>
+                 <div style="color: red;"  *ngIf="f['employeeId'].errors?.['required']">Required</div>
+         </div>
+        
+    
+    
+    
+         
+             <button type="submit"     [disabled]="assetRequestForm.invalid">Request</button>
+         
+         </form>
+        </div>
+
+      </div>

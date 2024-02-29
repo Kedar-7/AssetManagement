@@ -1,0 +1,31 @@
+.black-navbar {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .logo a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .login ul li {
+    display: inline;
+  }
+  
+  .login ul li a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+  }
+  

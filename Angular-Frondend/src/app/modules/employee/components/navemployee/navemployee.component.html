@@ -1,0 +1,18 @@
+
+<body>
+    <nav>
+      <div class="logo">
+        <a routerLink="./employeehome">Employee Dashboard</a>
+      </div>
+      <ul class="nav-links">
+        <li routerLinkActive="active"><a routerLink="./userslist">View Employees</a></li>
+        <!-- <li routerLinkActive="active"><a routerLink="./assetlist">View Assets</a></li> -->
+        <!-- <li routerLinkActive="active"><a routerLink="./addasset">Add Assets</a></li> -->
+        <li routerLinkActive="active"><a routerLink="./assetrequest">Asset Request</a></li>
+        <li routerLinkActive="active"><a routerLink="./assetservicerequest">Asset Service Request</a></li>
+        
+      </ul>
+      <div class="login">
+        <button type="button" class="btn btn-dark" routerLink="" (click)="deleteToken()" > Logout</button>
+      </div>
+    </nav>
