@@ -3,29 +3,18 @@
     min-width: 100vw;
     background: url('src\assets\userlist.png') no-repeat center center fixed;
     background-size: cover;
-     /* display: flex;
+    /* display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;  */
-    border: 10px solid black;
-
+    flex-direction: column; */
   }
-  .container {
-    min-width: 100vw;
-    display: flex;
-    justify-content: space-between;
-    gap :5px;
-    border: 2px solid black;
-    margin-bottom: 5px;
-  }
-  .search-container select,
-  .search-container input,
-  .search-container button{
+  .searchbar button{
     width: 100px;
     height: 50px;
-    margin-left: 5px;
  } 
-
+th, td, tr{
+    border: 1px solid black;
+}
 .container{
     width: 100%;
     display: flex;
@@ -44,13 +33,3 @@
     justify-content: space-between;
   
   }
-  #getall{
-    width: 20rem;
-    
-  }
-
-  #approved{
-    width: 20rem;
-  }
-
-  

@@ -1,6 +1,24 @@
-<p>assetservicerequestlist works!</p>
-<h2> Asset Service Request List</h2>
-<table class = "table table table-hover">
+<div class="full-container">
+    <div class="header"><h2> Asset List</h2></div>
+    <div class="container">
+    <div class="searchbar">   
+       
+    
+        <select name="search" class="form-select" id="search"  [(ngModel)]="select" >
+            <option value="" disabled selected> Select</option>
+            <option value="employeeId"> Employee Id</option>
+            <option value="assetId">Asset Id</option>
+          </select>
+          
+              <input type="text" class="form-control" placeholder="Search" id="searchbar" [(ngModel)]="searchName">
+              <button  (click)="performSearch(searchName,select)" class="btn btn-outline-info">Search</button>
+        
+       
+        <button  (click)="getAllAssetServiceRequests()" class="btn btn-dark" id="getall">All Assets</button>
+    </div>
+    </div>
+
+        <table class = "table table table-hover">
     <thead>
         <tr>
             <th>Service Request Id</th>
@@ -13,14 +31,21 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor = "let asset of   assetServiceRequestList" >
-            <td> {{ asset.serviceRequestId }} </td>
-            <td> {{ asset.issueType }} </td>
-            <td> {{ asset.dateRequested }} </td>
-            <td> {{ asset.status }} </td>
-            <td> {{ asset.assetId }}  </td>
-            <td> {{ asset.employeeId }}  </td>
-            <td> <button type="button" class="btn btn-danger"  (click)="deleteById(asset.serviceRequestId)">Delete</button>  </td>
+        <tr *ngFor = "let assetservice of   requests" >
+            <td> {{ assetservice.serviceRequestId }} </td>
+            <td> {{ assetservice.issueType }} </td>
+            <td> {{ assetservice.dateRequested }} </td>
+            <!-- <td> {{ asset.status }} </td> -->
+            <td>    <div class="admin">
+                <select name="admin" id="admin{{assetservice.serviceRequestId}}" [(ngModel)]="assetservice.status" (change)="updateStatus($event,assetservice.status , assetservice.serviceRequestId)"  >
+                    <option value="Pending" disabled selected>Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="In Progress">In Progress</option>
+                </select>
+            </div> </td>
+            <td> {{ assetservice.asset.assetId }} </td>
+            <td> {{ assetservice.employee.employeeId }} </td>
+            <td> <button type="button" class="btn btn-danger"  (click)="deleteById(assetservice.serviceRequestId)">Delete</button>  </td>
         </tr>
     </tbody>
 </table>

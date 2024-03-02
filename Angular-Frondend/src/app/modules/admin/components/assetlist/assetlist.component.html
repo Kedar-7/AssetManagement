@@ -1,38 +1,18 @@
-<!--<h2> Asset List</h2>
-<table class = "table table table-hover">
-    <thead>
-        <tr>
-            <th> Asset ID</th>
-            <th> Asset Name </th>
-            <th> Asset Category</th>
-            <th> Asset Model </th>
-            <th> Manufacturing Date </th>
-            <th> Expiry Date </th>
-            <th> Asset Value </th>
-            <th> Status </th>
-         
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor = "let asset of assetList" >
-            <td> {{ asset.assetId }} </td>
-            <td> {{ asset.assetName }} </td>
-            <td> {{ asset.assetCategory }} </td>
-            <td> {{ asset.assetModel }} </td>
-            <td> {{ asset.manufacturingDate }}  </td>
-            <td> {{ asset.expiryDate }}  </td>
-            <td> {{ asset.assetValue }}  </td>
-            <td> {{ asset.status }}  </td>
-            <td> <button type="button" class="btn btn-danger"  (click)="deleteById(asset.assetId)">Delete</button>  </td>
-        </tr>
-    </tbody>
-</table> -->
+<!-- 
 
 <div class="full-container">
     <div class="header"><h2> Asset List</h2></div>
     <div class="container">
     <div class="searchbar">
-        <!-- <label for="cars">Search By </label> -->
+        
+
+        <select name="filter" class="selectpicker" id="filter"  [(ngModel)]="category" (change)="displayByCategory(category)" >
+            <option value="" disabled selected> Category</option>
+            <option value="Electronics"> Electronics</option>
+            <option value="Office">Office</option>
+            <option value="Vehicle">Vehicle</option>
+            <option value="Furniture">Furniture</option>
+          </select>
     
     <select name="search" class="form-select" id="search"  [(ngModel)]="select" >
       <option value="" disabled selected> Select</option>
@@ -64,17 +44,23 @@
         <tbody>
             <tr *ngFor = "let asset of assetList" >
                 <td> {{ asset.assetId }} </td>
-                <td> {{ asset.assetName }} </td>
+                <td class="assetName"> {{ asset.assetName }} </td>
                 <td> {{ asset.assetCategory }} </td>
                 <td> {{ asset.assetModel }} </td>
                 <td> {{ asset.manufacturingDate }}  </td>
                 <td> {{ asset.expiryDate }}  </td>
-                <td> {{ asset.assetValue}}  </td>
-                <td> {{ asset.status }}   </td>
+                <td> {{ asset.assetValue | currency:'INR'}} </td>
+                <td>    <div class="admin">
+                    <select name="admin" id="admin{{asset.assetId}}" [(ngModel)]="asset.status" (change)="updateStatus($event,asset.status , asset.assetId)"  >
+                        <option value="" disabled selected>Select</option>
+                        <option value="Available">Available</option>
+                        <option value="In Use">In Use</option>
+                    </select>
+                </div> </td>
                 
                 <button type="button" class="btn btn-danger"  (click)="deleteById(asset.assetId)">Delete</button>
     
-                <!-- <td> <button type="button" class="btn btn-danger" routerLink="../update/{{emp.employeeId}}">Update</button>  </td> -->
+                
     
             </tr>
         </tbody>
@@ -106,9 +92,8 @@
                 
                 <button type="button" class="btn btn-danger"  (click)="deleteById(asset.assetId)">Delete</button>
     
-                <!-- <td> <button type="button" class="btn btn-danger" routerLink="../update/{{emp.employeeId}}">Update</button>  </td> -->
-    
+         
             </tr>
         </tbody>
     </table>
-    </div>
+    </div> -->

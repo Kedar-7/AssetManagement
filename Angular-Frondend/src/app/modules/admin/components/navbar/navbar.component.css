@@ -6,7 +6,8 @@ body {
   nav {
     /* background-color: #8E7AB5; */
     width: 100vw;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
+    position: static;
     color: #fff;
     display: flex;
     justify-content: space-between;

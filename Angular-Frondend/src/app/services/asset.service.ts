@@ -46,7 +46,7 @@ export class AssetService {
 
      console.log(body);
 
-       return this.http.post<Asset>(this.baseURL+"addNewAsset",body);
+       return this.http.post<Asset>(this.baseURL+"addNewAsset",body,{headers:this.getHeaders()});
 
    }
   getAll():Observable<Asset[]>{
@@ -61,7 +61,7 @@ delete(assetId:number):Observable<string>{
 
 searchByName(assetName:string):Observable<Asset[]>{
   console.log(assetName);
-  return this.http.get<Asset[]>(this.baseURL+`displayByName/${name}`,{headers:this.getHeaders()})
+  return this.http.get<Asset[]>(this.baseURL+`displayByName/${assetName}`,{headers:this.getHeaders()})
 }
 
 
@@ -82,6 +82,12 @@ updateAssetDetail(asset: Asset): Observable<Asset> {
   return this.http.put<Asset>(this.baseURL+"updateAsset", asset,{headers:this.getHeaders()});
 }
 
+displayByCategory(category: string): Observable<Asset[]>{
+  return this.http.get<Asset[]>(this.baseURL+"displayAssetByCategory/"+category,{headers:this.getHeaders()})
+}
+updateStatus(status: string, id:number): Observable<Asset> {
+  console.log(status+" "+id);
+  return this.http.put<Asset> (this.baseURL + "updateStatus/" + status + "/" + id, {}, {headers:this.getHeaders()});}
 
 
 }

@@ -13,6 +13,7 @@ import { AssetservicerequestlistComponent } from './components/assetservicereque
 import { AdminhomeComponent } from './components/adminhome/adminhome.component';
 import { UpdateemployeeComponent } from './components/updateemployee/updateemployee.component';
 import { UpdateassetComponent } from './components/updateasset/updateasset.component';
+import { AssetauditComponent } from './components/assetaudit/assetaudit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'adminhomepage', pathMatch: 'full' },
@@ -30,7 +31,7 @@ const routes: Routes = [
   {path: 'update/:employeeId', component: UpdateemployeeComponent},
 
   {path: 'updateasset/:assetId', component: UpdateassetComponent},
-
+  {path: 'assetaudit', component: AssetauditComponent},
   {path: 'adminhomepage', component: AdminhomeComponent}
 
   ]

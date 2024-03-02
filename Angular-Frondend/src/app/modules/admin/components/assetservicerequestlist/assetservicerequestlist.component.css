@@ -1,0 +1,34 @@
+.full-container{
+    min-height: 100vh;
+    min-width: 100vw;
+    background: url('src\assets\userlist.png') no-repeat center center fixed;
+    background-size: cover;
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; */
+  }
+
+  .searchbar button{
+    width: 100px;
+    height: 50px;
+ } 
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .searchbar{
+    width:85%; 
+    /* position: absolute; */
+    /* margin-left: 250px; */
+  
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+  
+  }

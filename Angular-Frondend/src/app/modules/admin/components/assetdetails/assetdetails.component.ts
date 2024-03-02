@@ -35,10 +35,14 @@ export class AssetdetailsComponent {
   showTables:string='';
   select: string='';
 searchName: string='';
+category: string='';
+status: string='';
 
   constructor(private assetService: AssetService,private confirmService: NgConfirmService){}
 
   ngOnInit(){
+    this.getAllAssets();
+    this.showTables='name';
   }
 
   getAllAssets(){
@@ -49,8 +53,23 @@ searchName: string='';
   }
 
   deleteById(assetId:number){
-    this.assetService.delete(assetId).subscribe( (msg)=>{ console.log("Deleted the employeee with Id"+assetId+msg);});
-    this.getAllAssets();
+    this.confirmService.showConfirm('Are you sure you want to delete?', 
+    ()=>{
+      this.assetService.delete(assetId).subscribe( (msg)=>{ console.log("Deleted the asset with Id"+assetId+msg);},
+      (error) => {
+        console.error("Error deleting asset:", error);
+      });
+      this.getAllAssets();
+      this.showTables='name';
+
+        
+    },
+    ()=>{
+      
+    }
+    
+    
+    )
       
   }
 
@@ -72,32 +91,59 @@ searchName: string='';
     })
   }
 
-//   performSearch(searchName:string,select:string){
+  updateStatus(event:any,status:string, id:number){
 
-//     if(select == 'assetName'){
+    this.confirmService.showConfirm('Are you sure you want to delete?', 
+    ()=>{
+      this.assetService.updateStatus(status, id).subscribe((asset)=>{
+        this.asset = asset;
+        console.log(asset);
+
+        this.getAllAssets();
+        this.showTables='name';
+        
+      })    
+    },
+    ()=>{
       
-//       this.searchByName(searchName);
-//       this.showTables='name';
-//     }
-//     else if(select == 'assetId'){
-//       console.log(select);
-//       this.searchById(searchName);
-//       this.showTables='id';
+    }
+    
+    
+    
+    )
+    
+  
+    
 
-      
-//     }
-// }
-
-performSearch(searchName:string,select:string) {
-  if (this.select === 'assetName') {
-    this.searchByName(this.searchName);
-    this.showTables = 'name';
-  } else if (this.select === 'assetId') {
-    this.searchById(this.searchName);
-    this.showTables = 'id';
   }
+
+
+
+displayByCategory(category:string){
+  console.log(category);
+  
+  this.assetService.displayByCategory(category).subscribe((list)=>{
+    this.assetList = list;
+    console.log(this.assetList);
+    
+  })
 }
 
+performSearch(searchName:string,select:string){
+
+  if(select == 'assetName'){
+    
+    this.searchByName(searchName);
+    this.showTables='name';
+  }
+  else if(select == 'assetId'){
+    console.log(select);
+    this.searchById(searchName);
+    this.showTables='id';
+
+    
+  }
+}
 
 displayAll(){
   this.getAllAssets();

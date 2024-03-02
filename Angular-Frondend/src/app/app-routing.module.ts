@@ -9,6 +9,8 @@ import { LoginComponent } from './modules/home/components/login/login.component'
 import { AssetdetailsComponent } from './modules/admin/components/assetdetails/assetdetails.component';
 import { HomeComponent } from './modules/home/components/home/home.component';
 import { AdmindashboardComponent } from './modules/admin/components/admindashboard/admindashboard.component';
+import { authGuard } from './guards/auth.guard';
+import { AuthguardService } from './services/authguard.service';
 
 const routes: Routes = [
   // {path: '', component: HomeComponent},
@@ -21,11 +23,17 @@ const routes: Routes = [
   // {path: 'assetservicerequest', component: AssetservicerequestComponent},
   // {path: 'login', component: LoginComponent},
 
-  {path: '', loadChildren: () => import('./modules/home/home.module').then((m)=> m.HomeModule)},
+  {path: '',
+  
+  loadChildren: () => import('./modules/home/home.module').then((m)=> m.HomeModule)},
 
-  {path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then((m)=> m.AdminModule)},
+  {path: 'admin', 
+  canActivate: [AuthguardService],
+  loadChildren: () => import('./modules/admin/admin.module').then((m)=> m.AdminModule)},
 
-  {path: 'employee', loadChildren: () => import('./modules/employee/employee.module').then((m)=> m.EmployeeModule)}
+  {path: 'employee', 
+  canActivate: [AuthguardService],
+  loadChildren: () => import('./modules/employee/employee.module').then((m)=> m.EmployeeModule)}
 
 
 ];

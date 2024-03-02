@@ -24,6 +24,10 @@ response: any;
 
   ngOnInit(): void {
     // this.getAccessToken(this.authRequest);
+    // if(this.jwtService.isLoggedIn()){
+    //   this.router.navigate(['admin']) || 
+    //   this.router.navigate(['employee']);
+    // }
   }
 
 
@@ -55,7 +59,8 @@ response: any;
     this.employeeService.getRole(email).subscribe((role: string) => {
       this.empRole = role;
       console.log(role);
-  
+      localStorage.setItem('role', role);
+      console.log(localStorage.getItem('role'));
       if (this.empRole === 'Admin') {
         console.log('admin');
 

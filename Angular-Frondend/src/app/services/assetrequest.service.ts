@@ -41,4 +41,27 @@ export class AssetrequestService {
     
     }
 
+    searchById(requestId:string):Observable<AssetRequest>{
+  
+      console.log(requestId)
+      return this.http.get<AssetRequest>(this.baseURL+`getbyid/${parseInt(requestId)}`,{headers:this.getHeaders()});
+    
+    }
+
+    employeeInfo():Observable<AssetRequest[]>{
+      return this.http.get<AssetRequest[]>(this.baseURL+"displayAssetEmployeeInfo",{headers:this.getHeaders()  },);
+    }
+
+    updateStatus(status:string,requestId:number){
+      console.log(status+" "+requestId);
+  return this.http.put(this.baseURL + "updateStatus/" + status + "/" + requestId, {}, {headers:this.getHeaders()});
+    }
+
+    getEmployeesByAssets(employeeId:string):Observable<AssetRequest[]>{
+      return this.http.get<AssetRequest[]>(this.baseURL + `displayEmployeeInfo/${parseInt(employeeId)}`,{headers:this.getHeaders()})
+    }
+
+    getAssetsInfo(assetId:string):Observable<AssetRequest[]>{
+      return this.http.get<AssetRequest[]>(this.baseURL + `displayAssetInfo/${parseInt(assetId)}`,{headers:this.getHeaders()})
+    }
 }

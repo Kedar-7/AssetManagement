@@ -8,7 +8,13 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root'
 })
 export class AuthService {
-  
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('jwtToken') ;
+  }
+
+  verifyRole():any{
+    return localStorage.getItem('role');
+  }
   constructor(private http: HttpClient) {}
 
   baseURL: string = 'http://localhost:8080/';

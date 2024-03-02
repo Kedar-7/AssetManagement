@@ -6,13 +6,15 @@ import { AssetrequestlistComponent } from './components/assetrequestlist/assetre
 import { AssetservicerequestlistComponent } from './components/assetservicerequestlist/assetservicerequestlist.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateassetComponent } from './components/updateasset/updateasset.component';
+import { AssetauditComponent } from './components/assetaudit/assetaudit.component';
 
 
 @NgModule({
   declarations: [
     AssetrequestlistComponent,
     AssetservicerequestlistComponent,
-    UpdateassetComponent
+    UpdateassetComponent,
+    AssetauditComponent
   ],
   imports: [
     CommonModule,

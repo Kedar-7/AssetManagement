@@ -35,9 +35,24 @@ export class AssetservicerequestService {
         return this.http.get<AssetServiceRequest[]>(this.baseURL+"displayAllRequests",{headers:this.getHeaders()});
     }
     
-  delete(requestId:number):Observable<string>{
+  delete(serviceRequestId:number):Observable<string>{
     
-      return  this.http.delete<string>(this.baseURL+`deleteById/${requestId}`);
+      return  this.http.delete<string>(this.baseURL+`deleteById/${serviceRequestId}`,{headers:this.getHeaders()});
     
     }
+
+    updateStatus(status:string,requestId:number){
+      console.log(status+" "+requestId);
+  return this.http.put(this.baseURL + "updateStatus/" + status + "/" + requestId, {}, {headers:this.getHeaders()});
+    }
+
+    getEmployeesByAssets(employeeId:string):Observable<AssetServiceRequest[]>{
+      return this.http.get<AssetServiceRequest[]>(this.baseURL + `displayEmployeeInfo/${parseInt(employeeId)}`,{headers:this.getHeaders()})
+    }
+
+    getAssetsInfo(assetId:string):Observable<AssetServiceRequest[]>{
+      return this.http.get<AssetServiceRequest[]>(this.baseURL + `displayAssetInfo/${parseInt(assetId)}`,{headers:this.getHeaders()})
+    }
+
+
 }

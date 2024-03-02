@@ -18,6 +18,7 @@ import { AdmindashboardComponent } from './modules/admin/components/admindashboa
 import { NavhomeComponent } from './modules/home/components/navhome/navhome.component'
 import { NgConfirmModule } from 'ng-confirm-box';
 import { UpdateemployeeComponent } from './modules/admin/components/updateemployee/updateemployee.component';
+import { authGuard } from './guards/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { UpdateemployeeComponent } from './modules/admin/components/updateemploy
     FormsModule,
     NgConfirmModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
